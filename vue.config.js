@@ -3,7 +3,7 @@ const path= require("path")
 module.exports={
     devServer:{
         proxy:{
-            "/book"{
+            "/rexxar":{
                 target:"https://m.douban.com",
                 changeOrigin:true
             }
@@ -22,5 +22,6 @@ module.exports={
                 "@api":path.join(__dirname,"./src/api"),
             }
         }
-    }
+    },
+    
 }
