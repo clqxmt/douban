@@ -1,0 +1,36 @@
+export default{
+    path:"/bookstore",
+    name:"bookstore",
+    component:_=>import("@pages/bookstore"),
+    children:[
+        {
+            path:"/bookstore",
+            redirect:"/bookstore/activity"
+        },
+        {
+            path:"activity",
+            component:_=>import("@components/activity"),
+            name:"activity",
+            meta:{
+                flag:false
+            }
+
+        },
+        {
+            path:"newbook",
+            component:_=>import("@components/newbook"),
+            name:"newbook",
+            meta:{
+                flag:false
+            }
+        },
+        {
+            path:"topic",
+            component:_=>import("@components/topic"),
+            name:"topic",
+            meta:{
+                flag:false
+            }
+        }
+    ]
+}

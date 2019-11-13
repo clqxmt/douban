@@ -1,12 +1,12 @@
 <template>
-    <div class="book-detail">
+    <div class="book-detail" :style="{background:list.body_bg_color}">
         <div class="book-detail-info">
             <a href="">
-                <img src="https://img1.doubanio.com/view/subject/m/public/s33477929.jpg" alt="">
+                <img :src="list.pic.large" alt="">
             </a>
             <div class="book-detail-info-right">
-                <h2>告别的仪式</h2>
-                <p>上海译文出版社 / 2019-9出版</p>
+                <h2>{{list.title}}</h2>
+                <p>{{list.press | toString()}}  / {{list.pubdate | toString()}}出版</p>
                 <div class="status">
                     <a href="">
                         <i class="iconfont icon-xiangdu"></i>
@@ -35,17 +35,17 @@
                 </div>
                 <div class="sub-content">
                     <div class="sub-rating">
-                        <h3>8.3</h3>
+                        <h3>{{list.rating.value}}</h3>
                         <div class="rank">
                             <div class="rank-star">
-                                <span class="rating-star rating-star-full"></span>
-                                <span class="rating-star rating-star-full"></span>
-                                <span class="rating-star rating-star-full"></span>
-                                <span class="rating-star rating-star-full"></span>
-                                <span class="rating-star rating-star-half"></span>
+                                <span v-for="id of 5" :key="id"
+                                class="rating-star" 
+                                :class="id<=list.rating.star_count?'rating-star-full':'rating-star-gray'">
+                                </span>
+                               
                             </div>
                             <p>
-                                <em>112人评分</em>
+                                <em>{{list.rating.count}}人评分</em>
                             </p>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
         <div class="buy-link">
             <div class="reading">
                 <div class="sub-reading">
-                    <span class="text">试买 / 购买</span>
+                    <router-link to="/buy" tag="span" class="text">试买 / 购买</router-link>
                     <span class="price">58.00元起</span>
                 </div>
             </div>
@@ -121,7 +121,12 @@
 </template>
 <script>
     export default {
-        name: "bookDetail"
+        name: "bookDetail",
+        props:["list"],
+        created(){
+            // console.log(list);
+            // console.log(this.list,222);
+        }
     }
 </script>
 <style lang="scss">

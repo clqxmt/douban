@@ -2,8 +2,10 @@
     <div class="bookstore">
         <div class="title">
             <h4>豆瓣书店</h4>
-            <a
-                href="https://market.douban.com/book/?utm_campaign=book_freyr_section&utm_source=douban&utm_medium=mobile_web">更多</a>
+            <router-link
+                to="/bookstore"
+                tag="a"    
+            >更多</router-link>
         </div>
         <a :href="bookstoreHeader.url" class="promBook">
             <img :src="bookstoreHeader.cover.url"

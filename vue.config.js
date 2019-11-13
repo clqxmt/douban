@@ -6,6 +6,10 @@ module.exports={
             "/rexxar":{
                 target:"https://m.douban.com",
                 changeOrigin:true
+            },
+            "/api":{
+                target:"https://market.douban.com",
+                changeOrigin:true
             }
         }
     },

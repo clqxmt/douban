@@ -3,11 +3,11 @@
         <div class="book_fiction">
             <div class="title">
                 <h4>最受关注图书 | 虚构类</h4>
-                <a href="/book/hotfiction">更多</a>
+                <a href="javascript:void(0)">更多</a>
             </div>
             <ul class="items">
                 <li v-for="(item,index) in fictionList" :key="index">
-                    <router-link to="/detail" tag="a">
+                    <router-link :to="'/detail/'+item.id" tag="a">
                         <img :src="item.pic.large" alt="">
                         <p class="ellipsis">{{item.title}}</p>
                         <div class="rank">
@@ -29,15 +29,19 @@
     import {indexApi} from "@api/index"
     export default {
         name: "fiction",
+        
         data(){
             return{
                 fictionList:[]
             }
         },
         async created(){
+            
             let data=await indexApi();
+            
             sessionStorage.setItem("indexApi",JSON.stringify(data));
             this.fictionList=data.modules[2].data.selected_collections[0].items;
+            // console.log(this.fictionList);
         }
     }
 </script>

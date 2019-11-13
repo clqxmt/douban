@@ -2,7 +2,7 @@
         <div class="book_nonfiction">
                 <div class="title">
                     <h4>最受关注图书 | 非虚构类</h4>
-                    <a href="/book/hotnonfiction">更多</a>
+                    <a href="javascript:void(0)">更多</a>
                 </div>
                 <ul class="items">
                     <li v-for="(item,index) in nonfictionList" :key="index">
