@@ -12,6 +12,10 @@ server.interceptors.request.use((config)=>{
     if(config.method=="get"){
         config.params={...config.data};
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43315f135e2740ba6028db3c4fcfafaf34d718b7
     return config;
     //config.headers["content-type"]="application/json"
 },(err)=>{
@@ -24,7 +28,11 @@ server.interceptors.response.use((res)=>{
         return res.data;
     }
 },(err)=>{
+<<<<<<< HEAD
     return Promise.reject(err)
+=======
+    return Promise.reject(err);
+>>>>>>> 43315f135e2740ba6028db3c4fcfafaf34d718b7
 })
 
 export default server
