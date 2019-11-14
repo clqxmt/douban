@@ -1,22 +1,20 @@
 <template>
   <div id="app">
-    
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
-<script>
-  import Vue from "vue"
 
-import { Search } from 'vant'
-Vue.use(Search)
-export default{
-  name:"App",
-  components:{
-   
-  }
+<script>
+export default {
+  
 }
+
 </script>
+
+
 <style lang="scss">
  
 .page{
@@ -66,3 +64,4 @@ export default{
     }
 }
 </style>
+

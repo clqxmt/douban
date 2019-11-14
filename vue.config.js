@@ -24,6 +24,7 @@ module.exports={
                 "@store":path.join(__dirname,"./src/store"),
                 "@utils":path.join(__dirname,"./src/utils"),
                 "@api":path.join(__dirname,"./src/api"),
+                
             }
         }
     },

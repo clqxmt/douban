@@ -1,15 +1,29 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import fake from "./fake"
+import famouse from "./famouse";
+
+
+
+
 import bookstore from './bookstore'
+
+
+import top250 from './top250'
+import nonfiction from './nonfiction'
+import highscore from './highscore'
+import film from './film'
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
+
     mode:"hash",
     routes:[
         {
             path:"/",
+
             redirect:"/book"
         },
         {
@@ -56,6 +70,7 @@ const router = new VueRouter({
             
         }
     ]
+
 })
 
 
@@ -70,4 +85,6 @@ router.beforeEach((to,from,next)=>{
         next();
     }
 })
+
+
 export default router
