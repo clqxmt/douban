@@ -20,15 +20,13 @@ export const highscoreApi = ()=>http({
 
 // https://m.douban.com/rexxar/api/v2/subject_collection/book_top250/items    ?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0
 // top250  接口
-export const top250Api = ()=>http({
+export const top250Api = (start = 0)=>http({
     method:"get",
     url:"/rexxar/api/v2/subject_collection/book_top250/items",
     data:{
-        // os:ios,
         for_mobile:1,
-        // callback:jsonp1,
-        start:0,
-        count:18,
+        start:start,
+        count:5,
         loc_id:0,
         _:0
     }
@@ -59,7 +57,7 @@ export const nonfictionApi = ()=>http({
     url:"/rexxar/api/v2/subject_collection/book_nonfiction/items",
     data:{
         for_mobile:19,
-        start:19,
+        start:0,
         count:18,
         loc_id:19,
         _:19
@@ -67,21 +65,13 @@ export const nonfictionApi = ()=>http({
 })
 
 
+// 不知道是不是详情页的接口
+// https://m.douban.com/rexxar/api/v2/book/'书籍ID'
+// export const detailApi = ()=>http({
+//     method:"get",
+    // url:"/rexxar/api/v2/book"+id,
+//     data:{
+//         for_mobile:1
+//     }
+// })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- *  管理整个项目的接口
- * 
- */

@@ -17,7 +17,13 @@ const router = new VueRouter({
       top250,
       nonfiction,
       highscore,
-      film
+      film,
+      {
+        path:"/detail/:id/:nm",
+        component:_=>import("@pages/detail"),
+        name:"Detail",
+        props:true
+      }
   ]
 })
 

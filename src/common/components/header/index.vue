@@ -37,6 +37,7 @@ export default {
         box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         background: #fff;
         color: #fff;
+        z-index: 10;
     }
     .top{
         width: 100%;

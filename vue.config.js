@@ -3,7 +3,7 @@ const path= require("path")
 module.exports={
     devServer:{
         proxy:{
-            "/book":{
+            "/rexxar":{
                 target:"https://m.douban.com",
                 changeOrigin:true
             }
