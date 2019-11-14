@@ -6,9 +6,12 @@
             <input type="search" placeholder="搜索" @click="handleFocus()"/>
         </form>
        <div class="nav-btn">
-            <a href="" class="logout" v-if="false">退出登录</a>
+            <v-touch 
+            tag="a"
+            @tap="handleLogout"
+            class="logout" v-if="isLogin" >退出登录</v-touch>
             <a v-if="!isShow" href="/to_pc/?url=https%3A%2F%2Fm.douban.com%2Fbook%2F" class="app"></a>
-            <a href="" class="cancle" v-if="isShow" @click="handleCancle()">取消</a>
+            <a class="cancle" v-if="isShow" @click="handleCancle()">取消</a>
        </div>
     </div>
 </template>
@@ -19,7 +22,8 @@ export default{
     data(){
         return{
             isShow:false,
-            flag:true
+            flag:true,
+            isLogin:false
         }
     },
     methods: {
@@ -33,9 +37,17 @@ export default{
         handleCancle(){
             this.flag=true;
             this.isShow=!this.isShow;
+        },
+        handleLogout(){
+            this.isLogin=false;
+            localStorage.removeItem("token");
         }
     },
     created(){
+        let token=localStorage.getItem("token");
+        if(token){
+            this.isLogin=true;
+        }
         
     }
 }

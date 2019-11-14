@@ -31,13 +31,18 @@ export default{
     },
     async created(){
         let data=await detailApi(this.$props.id);
-        // // console.log(data);
         this.bookDetailList=data;
         this.bookContent=data.intro;
-      
-        console.log(this.bookDetailList,this.bookDetailList.id);
-        // console.log(this.bookContent,111);
+        localStorage.setItem("list",JSON.stringify(this.bookDetailList));
        
+    },
+     watch:{
+        async "$route"(){
+            let data=await detailApi(this.$props.id);
+            this.bookDetailList=data;
+            this.bookContent=data.intro;
+            localStorage.setItem("list",JSON.stringify(this.bookDetailList));
+        }
     }
 
 }

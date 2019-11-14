@@ -15,5 +15,6 @@ Vue.config.productionTip = false
 Vue.use(VueTouch,{name:"v-touch"})
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

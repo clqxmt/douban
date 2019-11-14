@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Register v-if="!is" @handle="change"></Register>
-        <Sign v-if="is" @handle="change"></Sign>
+        <Register v-if="!this.$store.state.is"></Register>
+        <Sign v-if="this.$store.state.is"></Sign>
     </div>
 </template>
 <script>
@@ -9,11 +9,7 @@
     import Sign from "@components/sign"
 export default{
     name:"login",
-    data(){
-        return{
-            is:true
-        }
-    },
+   
     components:{
         Register,
         Sign
