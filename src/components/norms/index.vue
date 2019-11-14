@@ -1,6 +1,6 @@
 <template>
   <div class="specific-two">
-    <img src="../img/sad3.jpg" alt />
+    <img src="" alt />
     <div class="book">
       <ul>
         <li>
@@ -49,7 +49,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:"norms"
+};
 </script>
 
 <style lang="scss">

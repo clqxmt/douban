@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="comment">
       <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4910.jpg" />
       <div class="select">
@@ -8,13 +7,13 @@
             <li v-for="(item,index) in list" :key="index">{{item}}</li>
           </ul>
         </div>
+
+        <router-view></router-view>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Translate from "@components/translate";
 export default {
     name:"shot",
     data(){
@@ -26,10 +25,18 @@ export default {
 </script>
 
 <style>
+.comment{
+  width: 100%;
+  height: 100%;
+}
 .comment > img {
   width: 100%;
   height: 2.333rem;
   vertical-align: top;
+}
+.select{
+  width: 100%;
+  height: 100%;
 }
 .checked {
   width: 100%;
@@ -43,7 +50,6 @@ export default {
   align-items: center;
 }
 .checked ul li {
-  float: left;
   width: 0.55rem;
   font-size: 0.133rem;
   color: #9b9b9b;

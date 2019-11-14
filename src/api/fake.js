@@ -38,11 +38,28 @@ export const hotApi = (count=18)=>http({
 });
 
 //豆瓣短评板块
-export const shotApi = (limit)=>http({
+export const commentApi = ()=>http({
     methos:"get",
-    url:"/api/freyr/short_comments/6166",
+    url:"/api/freyr/short_comments/6166/",
     data:{
-        limit:5,
         start:0,
+        limit:5
+    }
+});
+
+//fake详情页
+export const introduceApi = (detailId)=>http({
+    methos:"get",
+    url:"/rexxar/api/v2/book/"+detailId,
+    data:{
+        for_mobile:1
+    }
+});
+
+export const shortApi = (ID,count=5)=>http({
+    methos:"get",
+    url:"/rexxar/api/v2/book/"+ID+"/forum_topics",
+    data:{
+        count:count,
     }
 });

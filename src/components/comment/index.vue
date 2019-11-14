@@ -24,82 +24,18 @@
           谁还能将森见笔下的春宵少女描绘的如此纤细美丽呢？
         </span>
       </li>
-      <li>
-        <div>
-          <img src alt />
-          <span>后浪</span>
-          <p>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-          </p>
-        </div>
-        <span>
-          中村佑介是大导演汤浅政明的动画《四叠半神话大系》
-          《春宵苦短，少女前进吧！》的人物原案，超人气奇幻作家森见登美彦的御用画师！
-          “森见登美彦X中村佑介X汤浅政明”，就代表着文艺世代的浪漫绮想，
-          水手服少女与玫瑰色青春的交响诗~这本画集是中村佑介出道十年后第一本画集，
-          全面回顾了从大学时代手绘稿至2008年的各类作品，也是中文世界首次引进！
-        </span>
-      </li>
-      <li>
-        <div>
-          <img src alt />
-          <span>艺饭</span>
-          <p>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-          </p>
-        </div>
-        <span>
-          太喜欢中村佑介笔下的水手服少女了！
-          从早年淡雅文艺的手绘涂鸦，到后期缤纷绚烂的各种专辑海报、
-          小说封面都有收录，满满的和风感！沉迷在里面只想一直翻下去！！
-        </span>
-      </li>
-      <li>
-        <div>
-          <img src alt />
-          <span>Lemburse</span>
-          <p>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-          </p>
-        </div>
-        <span>是要看很多很多少女才能画得这么好吧</span>
-      </li>
-      <li>
-        <div>
-          <img src alt />
-          <span>cai</span>
-          <p>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-            <i class="iconfont icon-star"></i>
-          </p>
-        </div>
-        <span>
-          快速先翻完了。书能够完美地平铺开来欣赏画作这一点超级棒！
-          后面的学生时代作品也超级好看，期待第二本NOW也赶紧出来。
-          一本中版相当于日版一半不到的价格实在令人心动， 终于可以达成收藏自用传教三连的完美成就了。
-        </span>
-      </li>
     </ul>
   </div>
 </template>
 
 <script>
-export default {};
+import { commentApi } from "@api/fake";
+export default {
+  name:"comment",
+  created(){
+    console.log(commentApi())
+  }
+};
 </script>
 
 <style>

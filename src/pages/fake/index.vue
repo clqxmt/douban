@@ -10,8 +10,8 @@
           <span>|</span>虚构类
         </h2>
         <ul>
-          <li  v-for="(item,index) in fakeList" :key="index">
-            <a href="./detaile.html">
+          <router-link v-for="(item,index) in fakeList" :key="index" :to="'/detail/'+item.id+'/'+item.title" tag="li">
+            <a>
               <img :src="item.cover.url" alt />
               <div>
                 <p>{{item.title}}</p>
@@ -26,7 +26,7 @@
                 <span>{{item.info}}</span>
               </div>
             </a>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>

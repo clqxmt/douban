@@ -7,8 +7,8 @@
       <div class="middle-head">
         <h2>经典名著</h2>
         <ul>
-          <li v-for="(item,index) in famouseList" :key="index">
-            <a href="./detaile.html">
+          <router-link tag="li" :to="'/famouseDetail/'+item.id+'/'+item.title" v-for="(item,index) in famouseList" :key="index">
+            <a>
               <img :src="item.cover.url" />
               <div>
                 <p>{{item.title}}</p>
@@ -23,7 +23,7 @@
                 <span>{{item.info}}</span>
               </div>
             </a>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
