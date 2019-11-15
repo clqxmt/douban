@@ -93,10 +93,6 @@
 </template>
 <script>
    
-    import Vue from 'vue'
-    import { Popup,Cell} from 'vant'
-
-    Vue.use(Popup).use(Cell)
     import EditAddress from "@components/address"
     export default {
         name:"orderInfo",
