@@ -6,15 +6,17 @@ class JSLoading {
         this.loadingVm = new LoadingFn({
             el:document.createElement("div")
         })
+        this.loadingMount();
     }
     loadingMount(){
-        document.appendChild(loadingVm.$mount().$el)
+        document.body.appendChild(this.loadingVm.$mount().$el)
     }
     destroyLoading(){
-
+        document.body.removeChild(this.loadingVm.$mount().$el)
     }
 }
 
+export default new JSLoading();
 /**
  * vue.extend 实现继承
  * 

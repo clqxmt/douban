@@ -9,6 +9,7 @@ import "@common/components"
 import "@common/filter"
 import "@common/components";
 
+import "./lib/loading/index.js";
 
 Vue.config.productionTip = false
 

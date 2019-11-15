@@ -63,10 +63,10 @@ export default {
     },
     // 当上拉加载更多请求数据完毕后
     handlefinishPullingUp(){
-        // 当上拉加载更多数据获取到以后，通知better-scroll可以进行下一次加载
-        this.scroll.finishPullUp();
         // 重新计算better-scroll
         this.scroll.refresh();
+        // 当上拉加载更多数据获取到以后，通知better-scroll可以进行下一次加载
+        this.scroll.finishPullUp();
     }
   }
 };

@@ -37,15 +37,16 @@ export default {
   data(){
       return {
           booksList:[],
-          BId:0
+          BId:0,
+          BCount:9
       }
   },
   created(){
     this.handleGetBooksList(0);
   },
   methods:{
-    async handleGetBooksList(bookId){
-      let data = await highscoreApi(bookId);
+    async handleGetBooksList(bookId,count){
+      let data = await highscoreApi(bookId,count);
       this.booksList = data.subject_collection_items;
     }
   },
@@ -60,6 +61,10 @@ export default {
       this.BId +=9;
       this.handleGetBooksList(this.BId)
     });
+    this.$refs.scroll.handlepullingUp(()=>{
+      this.BCount += 9;
+      this.handleGetBooksList(this.BId,this.BCount);
+    })
   }
 };
 </script>
@@ -101,6 +106,7 @@ export default {
   padding-left: 4%;
   padding-right: 4%;
   margin-bottom: 20px;
+  border-color: #fff;
   overflow: hidden;
 }
 .main ul li .books_logo {

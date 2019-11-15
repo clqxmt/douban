@@ -5,16 +5,15 @@
       <div class="detail" :style="{background:'#'+detail.header_bg_color}"> 
         <div class="book_info">
           <div class="book_logo">
-            <img :src="(detail.pic.normal?detail.pic.normal:detail.cover.url)" alt />
+            <img :src="(detail.pic?detail.pic.normal:detail.cover.url)" alt />
           </div>
           <div class="introduce">
             <h2>{{detail.title}}</h2>
             <div class="rank">
-              <span>No.{{detail.honor_infos[0].rank == undefined?'':detail.honor_infos[0].rank}}</span>
+              <span>No.{{detail.honor_infos[0] == undefined?'':detail.honor_infos[0].rank}}</span>
               <span>{{detail.honor_infos[0].title}}</span>
             </div>
             <p>{{detail.card_subtitle}}</p>
-            <!--  -->
             <div class="choose">
               <span>
                 <i></i>

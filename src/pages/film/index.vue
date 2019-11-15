@@ -18,7 +18,7 @@
                   <span class="star"></span>
                   <span class="star"></span>
                   <span class="star_none"></span>
-                  <span class="score">{{item.rating.value}}</span>
+                  <span class="Jscore">{{item.rating.value}}</span>
                 </div>
                 <p>{{item.info}}</p>
               </div>
@@ -37,15 +37,16 @@ export default {
   data() {
     return {
       booksList: [],
-      BId:0
+      BId:0,
+      BCount:5
     };
   },
   created() {
     this.handleGetBooksList(0);
   },
   methods:{
-    async handleGetBooksList(bookId){
-      let data = await filmApi(bookId);
+    async handleGetBooksList(bookId,count){
+      let data = await filmApi(bookId,count);
       this.booksList = data.subject_collection_items;
     }
   },
@@ -59,6 +60,10 @@ export default {
     this.$refs.scroll.handlepullingDown(()=>{
       this.BId += 5;
       this.handleGetBooksList(this.BId)
+    }),
+    this.$refs.scroll.handlepullingUp(()=>{
+      this.BCount += 5;
+      this.handleGetBooksList(this.BId,this.BCount);
     })
   }
 };
@@ -109,7 +114,7 @@ export default {
   padding: 5px 0;
   color: #494949;
 }
-.main ul li .book_introduce .stars .score {
+.main ul li .book_introduce .stars .Jscore {
   font-size: 0.1rem;
   color: #9b9b9b;
 }

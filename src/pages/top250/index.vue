@@ -18,7 +18,7 @@
                   <span class="star"></span>
                   <span class="star"></span>
                   <span class="star_none"></span>
-                  <span class="score">{{item.rating.value}}</span>
+                  <span class="Jscore">{{item.rating.value}}</span>
                 </div>
                 <p>{{item.info}}</p>
                 <i>{{item.description}}</i>
@@ -38,21 +38,22 @@ export default {
   data() {
     return {
       booksList: [],
-      BId:0
+      BId:0,
+      BCount:5
     };
   },
   created() {
     this.handleGetBooksList(0);
   },
   methods:{
-    async handleGetBooksList(bookId){
-      let data = await top250Api(bookId);
+    async handleGetBooksList(bookId,count){
+      let data = await top250Api(bookId,count);
       this.booksList = data.subject_collection_items;
     }
   },
   watch:{
     booksList(){
-      this.$refs.scroll.handleRefreshDown();
+      this.$refs.scroll.i();
     }
   },
   mounted(){
@@ -63,9 +64,11 @@ export default {
       this.handleGetBooksList(this.BId)
     });
     // 上拉加载更多
-    // this.$refs.scroll.handlepullingUp(()=>{
-    //   console.log(111);
-    // })
+    this.$refs.scroll.handlepullingUp(()=>{
+      // console.log(111);
+      this.BCount +=5;
+      this.handleGetBooksList(this.BId,this.BCount);
+    })
   }
 };
 </script>
@@ -115,7 +118,7 @@ export default {
   padding: 5px 0;
   color: #494949;
 }
-.main ul li .book_introduce .stars .score {
+.main ul li .book_introduce .stars .Jscore {
   font-size: 0.1rem;
   color: #9b9b9b;
 }

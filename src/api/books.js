@@ -2,13 +2,13 @@ import http from "@utils/request"
 // /rexxar/api/v2/subject_collection/book_score/items   ?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0
 // 高分书籍  接口
 
-export const highscoreApi = (start = 0)=>http({
+export const highscoreApi = (start = 0,count = 9)=>http({
     method:"get",
     url:"/rexxar/api/v2/subject_collection/book_score/items",
     data:{
         for_mobile:1,
         start:start,
-        count:9,
+        count:count,
         loc_id:0,
         _:0
     }
@@ -18,13 +18,13 @@ export const highscoreApi = (start = 0)=>http({
 
 // https://m.douban.com/rexxar/api/v2/subject_collection/book_top250/items    ?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0
 // top250  接口
-export const top250Api = (start = 0)=>http({
+export const top250Api = (start = 0,count = 5)=>http({
     method:"get",
     url:"/rexxar/api/v2/subject_collection/book_top250/items",
     data:{
         for_mobile:1,
         start:start,
-        count:5,
+        count:count,
         loc_id:0,
         _:0
     }
@@ -33,13 +33,13 @@ export const top250Api = (start = 0)=>http({
 // https://m.douban.com/rexxar/api/v2/subject_collection/book_film_original/items  ?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0
 // 影视原著
 
-export const filmApi = (start = 0)=>http({
+export const filmApi = (start = 0,count = 5)=>http({
     method:"get",
     url:"/rexxar/api/v2/subject_collection/book_film_original/items",
     data:{
         for_mobile:1,
         start:start,
-        count:5,
+        count:count,
         loc_id:0,
         _:0
     }
@@ -50,13 +50,13 @@ export const filmApi = (start = 0)=>http({
 // https://m.douban.com/rexxar/api/v2/subject_collection/book_nonfiction/items  ?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0
 // 非虚构类
 
-export const nonfictionApi = (start = 0)=>http({
+export const nonfictionApi = (start = 0,count = 5)=>http({
     method:"get",
     url:"/rexxar/api/v2/subject_collection/book_nonfiction/items",
     data:{
         for_mobile:19,
         start:start,
-        count:5,
+        count:count,
         loc_id:0,
         _:0
     }
