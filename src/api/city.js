@@ -13,8 +13,13 @@ export const cityApi=()=>http({
         mainland_only:false
     }*/
     method:"get",
-    url:"/iplookup/iplookup.php",
+    url:"/data",
     data:{
-        format:"js"
+        id:104,
+        key:"Ub2TIRgGYSDSD",
+        ske:1
     }
+   
+
+    
 })

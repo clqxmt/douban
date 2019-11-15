@@ -59,7 +59,7 @@ let mutations={
             }
           })
           return;
-        }else(state.username==data[i].username && hash==data[i].password)
+        }else if(state.username==data[i].username && hash==data[i].password)
         {
             let name=state.username;
             let token=tokenUtils.sendToken({name});

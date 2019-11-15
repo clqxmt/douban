@@ -16,7 +16,7 @@
                     <div class="selectProvince select">
                         <select>
                             <option value="">选择省</option>
-                            <option value="" v-for=""></option>
+                            <!-- <option  v-for="(item,index) in pList">{{item.title}}</option> -->
                         </select>
                         <i></i>
                     </div>
@@ -42,6 +42,37 @@
     import {cityApi} from "@api/city"
 export default{
     name:"address",
+    data(){
+        return{
+            pList:[
+                
+                {
+                    title:"北京",
+                    city:[
+                        {
+                            cityTitle:"北京",
+                            county:["昌平区","朝阳区","海淀区"]
+                        }
+                    ]
+                },
+                {
+                    title:"河南",
+                    city:[
+                        {
+                            cityTitle:"郑州",
+                            county:["二七区","新郑市"]
+                        },
+                        {
+                            cityTitle:"安阳",
+                            county:["文峰区","北城区"]
+                        }
+                    ]
+                }
+            ],
+            
+        }
+
+    },
     methods:{
         cancel(){
             

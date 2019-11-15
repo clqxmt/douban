@@ -15,8 +15,12 @@ module.exports={
                 target:"http://localhost:3000",
                 changeOrigin:true
             },
-            "/iplookup":{
-                target:"http://int.dpool.sina.com.cn"
+            "/data":{
+                target:"http://zhouxunwang.cn",
+                changeOrigin:true
+            },
+            "/search":{
+                target:"https://m.douban.com",
                 changeOrigin:true
             }
         }

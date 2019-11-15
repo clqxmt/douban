@@ -1,43 +1,54 @@
 <template>
     <div class="header">
         
-        <a href="" class="logo"></a>
-        <form action="" :calss="isShow?'on-search':''">
-            <input type="search" placeholder="搜索" @click="handleFocus()"/>
+        <a class="logo"></a>
+        <form :calss="isShow?'onSearch':''">
+            <input
+
+            @click="handleFocus()"
+            @search="handleSearch($event)"
+             type="search" placeholder="搜索" />
         </form>
        <div class="nav-btn">
             <v-touch 
             tag="a"
             @tap="handleLogout"
             class="logout" v-if="isLogin" >退出登录</v-touch>
-            <a v-if="!isShow" href="/to_pc/?url=https%3A%2F%2Fm.douban.com%2Fbook%2F" class="app"></a>
+            <a v-if="!isShow" class="app"></a>
             <a class="cancle" v-if="isShow" @click="handleCancle()">取消</a>
        </div>
     </div>
 </template>
 <script>
 import MessageBox from "@lib/messageBox/index.js"
+import {searchApi} from "@api/search"
 export default{
     name:"Header",
     data(){
         return{
             isShow:false,
             flag:true,
-            isLogin:false
+            isLogin:false,
+           
         }
     },
     methods: {
+        //点击搜索框
         handleFocus(){
             if(this.flag){
                 this.isShow=!this.isShow;
                 this.flag=false;
+                this.isLogin=!this.isLogin;
             }
             
         },
+        //取消搜索
         handleCancle(){
             this.flag=true;
             this.isShow=!this.isShow;
+            this.isLogin=!this.isLogin;
         },
+        //退出登录
         handleLogout(){
             this.isLogin=false;
             localStorage.removeItem("token");
@@ -45,6 +56,13 @@ export default{
                 content:"已退出登录",
                 confirm:function(){}
             })
+        },
+        //按下回车搜索
+        async handleSearch(e){
+            let searchVal=e.target.value;
+            console.log(111);
+            let data=await searchApi(searchVal);
+            console.log(data);
         }
     },
     created(){
@@ -108,9 +126,9 @@ export default{
         }
     
     }
-    .on-search{
-        width: 230px;
-        flex: 230px 0 0;
+    .onSearch{
+        width: 1.9167rem;
+        flex: 1.9167rem 0 0;
         animation: open ease-in 0.3s;
     }
     .nav-btn{
