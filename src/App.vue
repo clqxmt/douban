@@ -8,8 +8,11 @@
 
 
 <script>
+ import {removeApi} from "@api/login"
 export default {
-  
+created(){
+  // removeApi()
+}
 }
 
 </script>

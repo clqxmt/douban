@@ -6,7 +6,7 @@
                 </div>
                 <ul class="items">
                     <li v-for="(item,index) in nonfictionList" :key="index">
-                        <router-link to="/detail" tag="a">
+                        <router-link :to="'/detail/'+item.id" tag="a">
                             <img :src="item.pic.large" alt="">
                             <p class="ellipsis">{{item.title}}</p>
                             <div class="rank">
@@ -37,6 +37,7 @@ export default{
         if(!data){
             let data=await indexApi();
         }
+        // console.log(data);
         this.nonfictionList=data.modules[2].data.selected_collections[2].items;
     }
 }

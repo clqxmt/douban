@@ -2,7 +2,7 @@
     <div class="book-detail" :style="{background:list.body_bg_color}">
         <div class="book-detail-info">
             <a href="">
-                <img :src="list.pic.large" alt="">
+                <img :src="list.pic.normal" alt="">
             </a>
             <div class="book-detail-info-right">
                 <h2>{{list.title}}</h2>
@@ -106,16 +106,18 @@
         </div>
         <div class="buy-link">
             <div class="reading">
-                <div class="sub-reading">
-                    <router-link to="/buy" tag="span" class="text">试买 / 购买</router-link>
+                <router-link to="/buy" tag="div" class="sub-reading">
+                    <span class="text">试买 / 购买</span>
                     <span class="price">58.00元起</span>
-                </div>
+                </router-link>
             </div>
             <div class="buy">
                 <span class="text">其他电商购买</span>
                 <span class="price">37.50元起</span>
+               
             </div>
         </div>
+        
     </div>
 
 </template>
@@ -123,10 +125,6 @@
     export default {
         name: "bookDetail",
         props:["list"],
-        created(){
-            // console.log(list);
-            // console.log(this.list,222);
-        }
     }
 </script>
 <style lang="scss">
