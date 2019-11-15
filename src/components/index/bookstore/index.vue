@@ -30,7 +30,6 @@
                         <i>￥{{item.price}}</i>
                     </a>
                 </li>
-                
             </ul>
         </div>
     </div>

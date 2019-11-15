@@ -3,25 +3,29 @@
     <Header />
     <!-- https://m.douban.com/rexxar/api/v2/subject_collection/book_score/items?os=ios&for_mobile=1&callback=jsonp1&start=0&count=18&loc_id=0&_=0 -->
     <div class="main">
-      <div class="main_title">高分图书</div>
-      <ul>
-        <li v-for="(item,index) in booksList" :key="index">
-          <div class="books_logo">
-            <img :src="item.cover.url" alt />
-          </div>
-          <div class="info">
-            <h3>{{item.title}}</h3>
-            <span class="rank">
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star_none"></span>
-              <span>{{item.rating.value}}</span>
-            </span>
-          </div>
-        </li>
-      </ul>
+      <Jayce-scroll ref="scroll">
+        <div>
+          <div class="main_title">高分图书</div>
+          <ul>
+            <router-link tag="li" :to="'/jayceDetail/'+item.id+'/'+item.title"  v-for="(item,index) in booksList" :key="index">
+              <div class="books_logo">
+                <img :src="item.cover.url" alt />
+              </div>
+              <div class="info">
+                <h3>{{item.title}}</h3>
+                <span class="rank">
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star_none"></span>
+                  <span>{{item.rating.value}}</span>
+                </span>
+              </div>
+            </router-link>
+          </ul>
+        </div>
+      </Jayce-scroll>
     </div>
   </div>
 </template>
@@ -32,12 +36,30 @@ export default {
   name: "Highscore",
   data(){
       return {
-          booksList:[]
+          booksList:[],
+          BId:0
       }
   },
-  async created(){
-    let data = await highscoreApi();
-    this.booksList = data.subject_collection_items;
+  created(){
+    this.handleGetBooksList(0);
+  },
+  methods:{
+    async handleGetBooksList(bookId){
+      let data = await highscoreApi(bookId);
+      this.booksList = data.subject_collection_items;
+    }
+  },
+  watch:{
+    booksList(){
+      this.$refs.scroll.handleRefreshDown();
+    }
+  },
+  mounted(){
+    this.$refs.scroll.handleScroll();
+    this.$refs.scroll.handlepullingDown(()=>{
+      this.BId +=9;
+      this.handleGetBooksList(this.BId)
+    });
   }
 };
 </script>
@@ -45,6 +67,7 @@ export default {
 <style>
 .main {
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   padding: 0.392rem 0.063rem 0;
 }
