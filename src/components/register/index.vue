@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header>
+        <header class="login-header">
             <v-touch 
             tag="a"
             @tap="closePage()"
@@ -10,7 +10,7 @@
                 <a href="https://accounts.douban.com/passport/agreement">豆瓣使用协议、隐私政策</a>
             </p>
         </header>
-        <section>
+        <section class="login-section">
             <div class="main">
                 <!-- <div class="from">
                                 <div class="from-phone"></div>
@@ -53,6 +53,7 @@
     import {mapState,mapMutations} from "vuex"
     import {findApi,registerApi} from "@api/login"
     import crypto from "crypto"
+    import MessageBox from "@lib/messageBox/index.js"
     export default {
         name:"register",
         computed:{
@@ -74,16 +75,26 @@
             //    console.log(data);
                for(var i=0;i<data.length;i++){
                     if(this.username===data[i]["username"]){
-                        alert("用户已存在");
                         has=false;
+                        MessageBox({
+                            content:"用户已存在",
+                            confirm:function(){
+                                this.$store.commit("changeShow");
+                            }
+                        });
                         break;
                     }
                }
                if(has){
                     let hash=crypto.createHash("sha256").update(this.password).digest('hex');
-                    registerApi(this.username,hash);
-                    console.log(typeof hash,222);
-                    this.$store.commit("changeShow");
+                    let data=await registerApi(this.username,hash);
+                    MessageBox({
+                        content:"注册成功",
+                        confirm:function(){
+                            this.$store.commit("changeShow");
+                        }
+                    })
+                    
                }
            }
         }

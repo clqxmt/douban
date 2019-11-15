@@ -39,14 +39,18 @@ export default{
             listInfo:[]
         }
     },
+    methods:{
+        requestData(){
+            let list=JSON.parse(localStorage.getItem("list"));
+            this.listInfo=list;
+        }
+    },
     created(){
-        let list=JSON.parse(localStorage.getItem("list"));
-        this.listInfo=list;
+        this.requestData();
     },
     watch:{
         "$route"(){
-            let list=JSON.parse(localStorage.getItem("list"));
-            this.listInfo=list;
+            this.requestData();
         }
     }
 }

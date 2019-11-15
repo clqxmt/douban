@@ -14,6 +14,10 @@ module.exports={
             "/user":{
                 target:"http://localhost:3000",
                 changeOrigin:true
+            },
+            "/iplookup":{
+                target:"http://int.dpool.sina.com.cn"
+                changeOrigin:true
             }
         }
     },
@@ -28,7 +32,8 @@ module.exports={
                 "@store":path.join(__dirname,"./src/store"),
                 "@utils":path.join(__dirname,"./src/utils"),
                 "@api":path.join(__dirname,"./src/api"),
-                "@public":path.join(__dirname,"./public")
+                "@public":path.join(__dirname,"./public"),
+                "@lib":path.join(__dirname,"./src/lib")
             }
         }
     },

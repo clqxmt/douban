@@ -29,19 +29,21 @@ export default{
             
         }
     },
-    async created(){
-        let data=await detailApi(this.$props.id);
-        this.bookDetailList=data;
-        this.bookContent=data.intro;
-        localStorage.setItem("list",JSON.stringify(this.bookDetailList));
-       
-    },
-     watch:{
-        async "$route"(){
+    methods:{
+        async requestDate(){
             let data=await detailApi(this.$props.id);
             this.bookDetailList=data;
             this.bookContent=data.intro;
             localStorage.setItem("list",JSON.stringify(this.bookDetailList));
+        }
+    },
+    created(){
+        this.requestDate();
+       
+    },
+     watch:{
+        "$route"(){
+            this.requestDate();
         }
     }
 

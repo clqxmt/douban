@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header>
+        <header class="login-header">
             <v-touch 
             tag="a"
             @tap="closePage"
@@ -10,12 +10,9 @@
                 <a href="https://accounts.douban.com/passport/agreement">豆瓣使用协议、隐私政策</a>
             </p>
         </header>
-        <section>
+        <section class="login-section">
             <div class="main">
-                <!-- <div class="from">
-                                <div class="from-phone"></div>
-                                <div></div>
-                            </div> -->
+                
 
                 <div class="sign">
                     <form action="">
@@ -42,21 +39,17 @@
                             href="${ACCOUNTS_DOUBAN}/connect/sina_weibo/?from=None&amp;redir=${redir}&amp;fallback="></a>
                     </div>
                 </div>
+               
             </div>
         </section>
     </div>
 </template>
 <script>
     import {mapState,mapMutations} from "vuex"
+    
     export default {
         name: "login",
-        data(){
-            return{
-                is:true,
-                // username:"",
-                // password:"",
-            }
-        },
+       
         computed:{
             ...mapState({
                 username:state=>state.username,
@@ -70,12 +63,10 @@
                 closePage:"closePage"
 
            }),
-           
             handleSign(){
                 this.$store.dispatch("findActions","login");
-                // this.$router.push({name:"login"});
+               
             },
-            
         },
         
     }
@@ -85,7 +76,7 @@
         color: #42bd56;
     }
 
-    header {
+    .login-header {
         margin-right: 12px;
         margin: 30px 0;
         /* // font-size: 30px; */
@@ -120,7 +111,7 @@
         }
     }
 
-    section {
+    .login-section {
         .main {
             .sign {
                 padding-left: 15px;

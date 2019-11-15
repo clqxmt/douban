@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-
+import MessageBox from "@lib/messageBox/index.js"
 export default{
     name:"Header",
     data(){
@@ -41,6 +41,10 @@ export default{
         handleLogout(){
             this.isLogin=false;
             localStorage.removeItem("token");
+            MessageBox({
+                content:"已退出登录",
+                confirm:function(){}
+            })
         }
     },
     created(){

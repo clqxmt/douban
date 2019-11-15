@@ -4,7 +4,8 @@ import tokenUtils from "@utils/token"
 import {findApi} from "@api/login"
 import VueRouter from "vue-router";
 const crypto = require('crypto');
-const router=new VueRouter;
+const router=new VueRouter();
+import MessageBox from "@lib/messageBox/index.js"
 
 Vue.use(Vuex)
 
@@ -18,7 +19,7 @@ let state={
 let actions={
   async findActions({commit}){
     let data=await findApi();
-    console.log(data,111);
+    
     commit("loginMutations",data);
   },
 }
@@ -44,33 +45,47 @@ let mutations={
   //登录
   loginMutations(state,data){
     let hash=crypto.createHash("sha256").update(state.password).digest('hex');
-    console.log(hash,typeof hash,111);
+    
     let has=false;
     for(var i=0;i<data.length;i++){
-      console.log(data[i].password,data[i].username,444);
-        console.log(hash==data[i].password,333);
-        if(state.username==data[i].username && hash==data[i].password)
+      
+        if(localStorage.getItem("token"))
         {
-          let name=state.username;
-          let token=tokenUtils.sendToken({name});
-          console.log(token,222);
-          localStorage.setItem("token",token);
-          //document.cookie("token",token);
-          this.token=token;
-          alert("登录成功");
-          
-          has=true;
-          break;
+          //alert("已登录");
+          MessageBox({
+            content:"已登录",
+            confirm:function(){
+              router.push({name:"book"});
+            }
+          })
+          return;
+        }else(state.username==data[i].username && hash==data[i].password)
+        {
+            let name=state.username;
+            let token=tokenUtils.sendToken({name});
+            localStorage.setItem("token",token);
+            this.token=token;
+            //alert("登录成功");
+            has=true;
+            MessageBox({
+              content:"登录成功",
+              confirm:()=>{
+                router.back();
+              }
+            })
+            break;
         }
     }
     if(!has){
-      alert("用户名或密码不存在");
+      MessageBox({
+        content:"用户名或密码不存在",
+      });
     }
   },
 
   //关闭页面
   closePage(){
-    //this.$router.push("/book");
+    router.back();
   }
 
   

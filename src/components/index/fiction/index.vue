@@ -1,25 +1,27 @@
 <template>
     
         <div class="book_fiction">
-            <div class="title">
+            <div class="book-title">
                 <h4>最受关注图书 | 虚构类</h4>
                 <a href="javascript:void(0)">更多</a>
             </div>
-            <ul class="items">
-                <li v-for="(item,index) in fictionList" :key="index">
-                    <router-link :to="'/detail/'+item.id" tag="a">
-                        <img :src="item.pic.large" alt="">
-                        <p class="ellipsis">{{item.title}}</p>
-                        <div class="rank">
-                            <span v-for="id of 5" :key="id" class="rating-star"
-                            :class=" id<=item.rating.star_count?'rating-star-full':'rating-star-gray' "></span>
-                           
-                            <i>{{item.rating.value}}</i>
-                        </div>
-                    </router-link>
-                </li>
-                
-            </ul>
+            <div class="actionList">
+                <ul class="items">
+                        <li v-for="(item,index) in fictionList" :key="index">
+                            <router-link :to="'/detail/'+item.id" tag="a">
+                                <img :src="item.pic.large" alt="">
+                                <p class="ellipsis">{{item.title}}</p>
+                                <div class="rank">
+                                    <span v-for="id of 5" :key="id" class="rating-star"
+                                    :class=" id<=item.rating.star_count?'rating-star-full':'rating-star-gray' "></span>
+                                    
+                                    <i>{{item.rating.value}}</i>
+                                </div>
+                            </router-link>
+                        </li>
+                        
+                    </ul>
+            </div>
         </div>
        
     
@@ -35,14 +37,17 @@
                 fictionList:[]
             }
         },
-        async created(){
-            
-            let data=await indexApi();
-            
-            sessionStorage.setItem("indexApi",JSON.stringify(data));
-            this.fictionList=data.modules[2].data.selected_collections[0].items;
-            // console.log(this.fictionList);
-        }
+        created(){
+           this.requestData();
+        },
+        methods: {
+            async requestData(){
+                let data=await indexApi();
+                sessionStorage.setItem("indexApi",JSON.stringify(data));
+                this.fictionList=data.modules[2].data.selected_collections[0].items;
+            }
+        },
+         
     }
 </script>
 <style lang="scss">
@@ -53,7 +58,7 @@
         padding-left:0.15rem;
     }
 
-    .title {
+    .book-title {
         display: flex;
         width: 100%;
         height: 0.2rem;
@@ -74,11 +79,18 @@
             color: #42bd56;
         }
     }
-
+    .actionList{
+        width:100%;
+        height:100%;
+        overflow:hidden;
+    }
     .items {
+        width: calc(100% - 30px);
+        height: calc(100% + 17px);
+        overflow: auto;
         padding: 0.125rem 0 0.3583rem 0;
         display: flex;
-        overflow: hidden;
+        /* overflow: hidden; */
 
         li {
             margin-right: 0.0667rem;

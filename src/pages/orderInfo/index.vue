@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header>
+        <header class="orderInfo-header">
             <div class="address">收货地址</div>
             <div>
                 <div>
@@ -17,21 +17,21 @@
                 </div>
             </div>
         </header>
-        <section>
+        <section class="orderInfo-section">
             <a href="" class="title">豆瓣书店</a>
             <div class="main">
                 <div class="book">
-                    <a href="https://book.douban.com/subject/30396712/" class="book-img">
-                        <img src="https://img3.doubanio.com/view/dianpu_product_item/small/public/p2052084.jpg" alt="">
+                    <a :href="'/detail/'+orderList.id" class="book-img">
+                        <img :src="orderList.pic.large" alt="">
                     </a>
                     <div class="book-info">
                         <p class="name">
-                            <a href="https://book.douban.com/subject/30396712/">尸人庄谜案</a>
+                            <a :href="'/detail/'+orderList.id">{{orderList.title}}</a>
                         </p>
                         <p>数量：1</p>
                     </div>
                 </div>
-                <span class="price">￥38.40</span>
+                <span class="price">￥{{price}}</span>
             </div>
             <div class="count-info">
                 <div class="coupon">
@@ -40,11 +40,11 @@
                 </div>
                 <div class="subtotal">
                     <span>小计</span>
-                    <em>￥38.40</em>
+                    <em>￥{{orderList.price | toMoney()}}</em>
                 </div>
                 <div class="fare">
                     <span>运费</span>
-                    <em>￥5.00</em>
+                    <em>￥{{fare}}</em>
                 </div>
             </div>
             <div class="bill">
@@ -66,12 +66,18 @@
                 <li class="pay-weixin pay-item">
                     <i class="weixin-logo"></i>
                     <span class=" pay-text">使用微信支付</span>
-                    <span class="switch-btn"></span>
+                    <v-touch 
+                    tag="span"
+                    @tap="switchPayMethod()"
+                    class="switch-btn" :class="isSwitch?'switch-btn-after':''"></v-touch>
                 </li>
                 <li class="pay-zhifubao pay-item">
                     <i class="zhifubao-logo"></i>
                     <span class=" pay-text">使用支付宝支付</span>
-                    <span class="switch-btn"></span>
+                    <v-touch
+                    tag="span"
+                    @tap="switchPayMethod()"
+                    class="switch-btn" :class="(!isSwitch)?'switch-btn-after':''"></v-touch>
                 </li>
             </ul>
         </div>
@@ -79,7 +85,7 @@
         <!-- 支付金额 -->
         <div class="account">
             <div class="account-money">
-                <span>应付：<em>￥43.40</em></span>
+                <span>应付：<em>￥{{count}}</em></span>
             </div>
             <a href="" class="address">请填地址</a>
         </div>
@@ -93,7 +99,7 @@
 </template>
 <script>
    
-    import EditAddress from "@components/address"
+    import EditAddress from "@components/editAddress"
     export default {
         name:"orderInfo",
         components:{
@@ -101,8 +107,14 @@
         },
         data(){
             return{
-                show:false
+                show:false,
+                orderList:[],
+                price:"",
+                count:"",
+                fare:"",
+                isSwitch:true
             }
+
         },
         methods:{
             showAddress(){
@@ -112,6 +124,31 @@
             isShow(params){
                
                 this.show=params;
+            },
+            switchPayMethod(){
+                this.isSwitch=!this.isSwitch;
+            },
+
+            requestData(){
+                let list=JSON.parse(localStorage.getItem("list"));
+                this.orderList=list;
+                this.price=this.orderList.price[0].replace("元","");
+                
+                if(Number(this.price)<48){
+                    this.count=(Number(this.price)+5).toFixed(2);
+                    this.fare=5;
+                }else{
+                    this.fare=0;
+                    this.count=this.price;
+                }
+            }
+        },
+        created(){
+            this.requestData();
+        },
+        watch:{
+            "$route"(){
+                this.requestData();
             }
         }
     }
@@ -121,7 +158,7 @@
         background-color: #f9f9f9;
     }
 
-    header {
+    .orderInfo-header {
         margin-bottom: 10px;
 
         .address {
@@ -159,7 +196,7 @@
         }
     }
 
-    section {
+    .orderInfo-section {
         margin-bottom: 10px;
 
         .title {
@@ -261,7 +298,7 @@
 
         /* //发票 */
         .bill {
-            padding: 0 15px;
+            /* padding: 0 15px; */
             margin-top: 10px;
 
             .bill-open {
@@ -322,7 +359,8 @@
         margin-top: 10px;
         overflow: hidden;
         margin-bottom: 60px;
-
+        /* position:absolute;
+        bottom:-0.7083rem; */
         h3 {
             padding: 15px;
             font-size: 15px;
@@ -388,23 +426,23 @@
 
                 }
 
-                .switch-btn {
-                    &:after {
-                        content: "";
-                        margin-top: -4.5px;
-                        margin-left: -4.5px;
-                        height: 9px;
-                        width: 9px;
-                        background-color: #44883e;
-                        border-radius: 100%;
-                        left: 50%;
-                        top: 50%;
-                        position: absolute;
-                        z-index: 1;
-                    }
+                
+            }
+            .switch-btn-after {
+                &:after {
+                    content: "";
+                    margin-top: -4.5px;
+                    margin-left: -4.5px;
+                    height: 9px;
+                    width: 9px;
+                    background-color: #44883e;
+                    border-radius: 100%;
+                    left: 50%;
+                    top: 50%;
+                    position: absolute;
+                    z-index: 1;
                 }
             }
-
             /* //支付宝支付下的logo */
             .pay-zhifubao {
                 .zhifubao-logo {

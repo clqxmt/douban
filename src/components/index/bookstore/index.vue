@@ -1,15 +1,11 @@
 <template>
     <div class="bookstore">
-        <div class="title">
+        <div class="book-title">
             <h4>豆瓣书店</h4>
-            <router-link
-                to="/bookstore"
-                tag="a"    
-            >更多</router-link>
+            <router-link to="/bookstore" tag="a">更多</router-link>
         </div>
         <a :href="bookstoreHeader.url" class="promBook">
-            <img :src="bookstoreHeader.cover.url"
-                alt="">
+            <img :src="bookstoreHeader.cover.url" alt="">
             <div class="find-content">
                 <div class="content-title">
                     <span>{{bookstoreHeader.title}}</span>
@@ -21,51 +17,54 @@
             </div>
         </a>
         <div class="bookstore-list">
-            <ul class="items">
-                <li v-for="(item,index) in bookstoreList" :key="index">
-                    <a href="javascript:(0);">
-                        <img :src="item.cover.url"
-                            alt="">
-                        <span>{{item.title}}</span>
-                        <i>￥{{item.price}}</i>
-                    </a>
-                </li>
-                
-            </ul>
+            <div class="bookstoreList">
+                <ul class="items bookstore-items">
+                    <li v-for="(item,index) in bookstoreList" :key="index">
+                        <a href="javascript:(0);">
+                            <img :src="item.cover.url" alt="">
+                            <span>{{item.title}}</span>
+                            <i>￥{{item.price}}</i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
 
 </template>
 <script>
-    import {indexApi} from "@api/index"
+    import { indexApi } from "@api/index"
     export default {
         name: "BookStore",
-        data(){
-            return{
-                bookstoreHeader:[],
-                bookstoreList:[]
+        data() {
+            return {
+                bookstoreHeader: [],
+                bookstoreList: []
             }
         },
-        async created(){
-            var data=JSON.parse(sessionStorage.getItem("indexApi"));
-            if(!data){
-                let data=await indexApi();
+        async created() {
+            var data = JSON.parse(sessionStorage.getItem("indexApi"));
+            if (!data) {
+                let data = await indexApi();
             }
-            this.bookstoreHeader=data.modules[8].data.subject_collection_boards[0].header;
-            this.bookstoreList=data.modules[8].data.subject_collection_boards[0].items;
-           
+            this.bookstoreHeader = data.modules[8].data.subject_collection_boards[0].header;
+            this.bookstoreList = data.modules[8].data.subject_collection_boards[0].items;
+
         }
     }
 </script>
 <style lang="scss">
     .bookstore {
 
-        padding-left:0.15rem;
-        .title{
-            a{
-                padding-right:0;
+        padding-left: 0.15rem;
+
+        .title {
+            a {
+                padding-right: 0;
             }
         }
+
         .promBook {
             padding-right: 0.125rem;
             box-sizing: border-box;
@@ -113,7 +112,19 @@
         }
 
         .bookstore-list {
+            .bookstoreList{
+                width:100%;
+                 overflow: hidden;
+                 height:2.0583rem;
+             }
+            .bookstore-items{
+                width: calc(100% - 30px);
+                height:2.2rem;
+                overflow: auto; 
+            }
+            /* overflow:hidden; */
             ul {
+                /* */
                 li {
                     a {
                         img {
