@@ -11,51 +11,50 @@
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <li>
+                <router-link tag="li" :to="'/nonfiction'">
                     <a href="">
                         <span>非虚构图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
-                </li>
+                </router-link>
                 <li>
                     <a href="">
                         <span>名著经典</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
+                <router-link tag="li" :to="'/film'">
+                    <a href="">
+                        <span>影视原著</span>
+                        <i class="iconfont icon-arrow-right arrowRight"></i>
+                    </a>
+                </router-link>
                 <li>
                     <a href="">
-                        <span>影视名著</span>
+                        <span>新书速递</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
+                <router-link tag="li" :to="'/highscore'">
+                    <a href="">
+                        <span>高分图书</span>
+                        <i class="iconfont icon-arrow-right arrowRight"></i>
+                    </a>
+                </router-link>
                 <li>
                     <a href="">
-                        <span>影视名著</span>
+                        <span>热门图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <li>
+                <router-link tag="li" :to="'/top250'">
                     <a href="">
-                        <span>影视名著</span>
+                        <span>top250</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span>影视名著</span>
-                        <i class="iconfont icon-arrow-right arrowRight"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span>影视名著</span>
-                        <i class="iconfont icon-arrow-right arrowRight"></i>
-                    </a>
-                </li>
+                </router-link>
             </ul>
         </div>
-    </div>
     </div>
 </template>
 <script>

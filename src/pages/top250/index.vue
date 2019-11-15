@@ -2,43 +2,73 @@
   <div class="page">
     <Header />
     <div class="main">
-      <div class="main_title">图书 top250</div>
-      <ul>
-        <li v-for="(item,index) in booksList" :key="index">
-          <div class="book_logo">
-            <img :src="item.cover.url" alt />
-          </div>
-          <div class="book_introduce">
-            <h3>{{item.title}}</h3>
-            <div class="stars">
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star_none"></span>
-              <span class="score">{{item.rating.value}}</span>
-            </div>
-            <p>{{item.info}}</p>
-            <i>{{item.description}}</i>
-          </div>
-        </li>
-      </ul>
+      <Jayce-scroll ref="scroll">
+        <div>
+          <div class="main_title">图书 top250</div>
+          <ul>
+            <router-link tag="li" :to="'/jayceDetail/'+item.id+'/'+item.title" v-for="(item,index) in booksList" :key="index">
+              <div class="book_logo">
+                <img :src="item.cover.url" alt />
+              </div>
+              <div class="book_introduce">
+                <h3>{{item.title}}</h3>
+                <div class="stars">
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star_none"></span>
+                  <span class="Jscore">{{item.rating.value}}</span>
+                </div>
+                <p>{{item.info}}</p>
+                <i>{{item.description}}</i>
+              </div>
+            </router-link>
+          </ul>
+        </div>
+      </Jayce-scroll>
     </div>
   </div>
 </template>
 
 <script>
-import {top250Api} from "@api/books"
+import { top250Api } from "@api/books";
 export default {
   name: "Top250",
-  data(){
+  data() {
     return {
-      booksList:[]
+      booksList: [],
+      BId:0,
+      BCount:5
+    };
+  },
+  created() {
+    this.handleGetBooksList(0);
+  },
+  methods:{
+    async handleGetBooksList(bookId,count){
+      let data = await top250Api(bookId,count);
+      this.booksList = data.subject_collection_items;
     }
   },
-  async created(){
-    let data = await top250Api();
-    this.booksList = data.subject_collection_items;
+  watch:{
+    booksList(){
+      this.$refs.scroll.i();
+    }
+  },
+  mounted(){
+    this.$refs.scroll.handleScroll();
+    // 下拉刷新
+    this.$refs.scroll.handlepullingDown(()=>{
+      this.BId +=5;
+      this.handleGetBooksList(this.BId)
+    });
+    // 上拉加载更多
+    this.$refs.scroll.handlepullingUp(()=>{
+      // console.log(111);
+      this.BCount +=5;
+      this.handleGetBooksList(this.BId,this.BCount);
+    })
   }
 };
 </script>
@@ -46,6 +76,7 @@ export default {
 <style>
 .main {
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   padding: 0.392rem 0.063rem 0;
 }
@@ -87,7 +118,7 @@ export default {
   padding: 5px 0;
   color: #494949;
 }
-.main ul li .book_introduce .stars .score {
+.main ul li .book_introduce .stars .Jscore {
   font-size: 0.1rem;
   color: #9b9b9b;
 }
@@ -96,8 +127,8 @@ export default {
   padding-top: 5px;
   color: #9b9b9b;
 }
-.main ul li .book_introduce i{
-  font-size: .1rem;
+.main ul li .book_introduce i {
+  font-size: 0.1rem;
   color: #9b9b9b;
   margin-top: 14px;
   line-height: 18px;

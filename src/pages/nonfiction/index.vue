@@ -2,26 +2,30 @@
   <div class="page">
     <Header />
     <div class="main">
-      <div class="main_title">最受关注图书｜非虚构类</div>
-      <ul>
-        <li v-for="(item,index) in booksList" :key="index">
-          <div class="book_logo">
-            <img :src="item.cover.url" alt />
-          </div>
-          <div class="book_introduce">
-            <h3>{{item.title}}</h3>
-            <div class="stars">
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star"></span>
-              <span class="star_none"></span>
-              <span class="score">{{(item.rating == null)?item.null_rating_reason:item.rating.value}}</span>
-            </div>
-            <p>{{item.info}}</p>
-          </div>
-        </li>
-      </ul>
+      <Jayce-scroll ref="scroll">
+        <div>
+          <div class="main_title">最受关注图书｜非虚构类</div>
+          <ul>
+            <router-link tag="li" :to="'/jayceDetail/'+item.id+'/'+item.title" v-for="(item,index) in booksList" :key="index">
+              <div class="book_logo">
+                <img :src="item.cover.url" alt />
+              </div>
+              <div class="book_introduce">
+                <h3>{{item.title}}</h3>
+                <div class="stars">
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star"></span>
+                  <span class="star_none"></span>
+                  <span class="Jscore">{{(item.rating == null)?item.null_rating_reason:item.rating.value}}</span>
+                </div>
+                <p>{{item.info}}</p>
+              </div>
+            </router-link>
+          </ul>
+        </div>
+      </Jayce-scroll>    
     </div>
   </div>
 </template>
@@ -32,12 +36,35 @@ export default {
   name: "Nonfiction",
   data() {
     return {
-      booksList: []
+      booksList: [],
+      BId:0,
+      BCount:5
     };
   },
-  async created() {
-    let data = await nonfictionApi();
-    this.booksList = data.subject_collection_items;
+  created() {
+    this.handleGetBooksList(0);
+  },
+  methods:{
+    async handleGetBooksList(bookId,count){
+      let data = await nonfictionApi(bookId,count);
+      this.booksList = data.subject_collection_items;
+    }
+  },
+  watch:{
+    booksList(){
+      this.$refs.scroll.handleRefreshDown();
+    }
+  },
+  mounted(){
+    this.$refs.scroll.handleScroll();
+    this.$refs.scroll.handlepullingDown(()=>{
+      this.BId =+ 5;
+      this.handleGetBooksList(this.BId);
+    });
+    this.$refs.scroll.handlepullingUp(()=>{
+      this.BCount += 5;
+      this.handleGetBooksList(this.BId,this.BCount);
+    })
   }
 };
 </script>
@@ -45,6 +72,7 @@ export default {
 <style>
 .main {
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   padding: 0.392rem 0.063rem 0;
 }
@@ -86,7 +114,7 @@ export default {
   padding: 5px 0;
   color: #494949;
 }
-.main ul li .book_introduce .stars .score {
+.main ul li .book_introduce .stars .Jscore {
   font-size: 0.1rem;
   color: #9b9b9b;
 }

@@ -70,6 +70,32 @@ const router = new VueRouter({
                 checkToken:true
             },
             
+        },
+        top250,
+        nonfiction,
+        highscore,
+        film,
+        {
+            path:"/jayceDetail/:id/:nm",
+            name:"jayceDetail",
+            component:_=>import("@pages/jayceDetail"),
+            props:true
+        },
+        {
+            path:"/HBDetail",
+            name:"HBDetail",
+            component:_=>import("@pages/HBDetail"),
+            meta:{
+                flag:false
+            }
+        },
+        {
+            path:"/DostoevskyDetail",
+            name:"DostoevskyDetail",
+            component:_=>import("@pages/DostoevskyDetail"),
+            meta:{
+                flag:false
+            }
         }
     ]
 

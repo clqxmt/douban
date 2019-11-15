@@ -17,6 +17,7 @@
             </div>
         </a>
         <div class="bookstore-list">
+<<<<<<< HEAD
             <div class="bookstoreList">
                 <ul class="items bookstore-items">
                     <li v-for="(item,index) in bookstoreList" :key="index">
@@ -29,6 +30,18 @@
 
                 </ul>
             </div>
+=======
+            <ul class="items">
+                <li v-for="(item,index) in bookstoreList" :key="index">
+                    <a href="javascript:(0);">
+                        <img :src="item.cover.url"
+                            alt="">
+                        <span>{{item.title}}</span>
+                        <i>￥{{item.price}}</i>
+                    </a>
+                </li>
+            </ul>
+>>>>>>> d928f49271589da664cd14dab17860c301509795
         </div>
     </div>
 
