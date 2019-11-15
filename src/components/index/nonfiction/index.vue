@@ -37,6 +37,7 @@ export default{
         if(!data){
             let data=await indexApi();
         }
+        // console.log(data);
         this.nonfictionList=data.modules[2].data.selected_collections[2].items;
     }
 }

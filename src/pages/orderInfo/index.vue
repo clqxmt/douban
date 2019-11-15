@@ -311,6 +311,7 @@
                 color: rgba(0, 0, 0, .9);
                 background-color: #fff;
                 padding: 10px 15px;
+                /* padding-right:0; */
             }
         }
     }
@@ -345,7 +346,7 @@
                 color: rgba(0, 0, 0, .9);
                 border-bottom: 1px solid #f9f9f9;
                 border-color: #f9f9f9;
-
+                bottom:0;
                 i {
                     margin-right: 5px;
                     height: 22px;

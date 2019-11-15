@@ -16,7 +16,7 @@ export default{
     name:"bookContent",
     props:["introList"],
     created(){
-        // console.log(this.introList);
+        
     }
 }
 </script>

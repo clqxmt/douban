@@ -1,15 +1,25 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import fake from "./fake"
+import famouse from "./famouse";
 import bookstore from './bookstore'
+import top250 from './top250'
+import nonfiction from './nonfiction'
+import highscore from './highscore'
+import film from './film'
+
+import tokenUtils from "@utils/token"
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
+
     mode:"hash",
     routes:[
         {
             path:"/",
+
             redirect:"/book"
         },
         {
@@ -17,7 +27,8 @@ const router = new VueRouter({
             name:"book",
             component:_=>import("@pages/index"),
             meta:{
-                flag:false
+                flag:false,
+                checkToken:true
             }
         },
         {
@@ -26,16 +37,19 @@ const router = new VueRouter({
             props:true,
             component:_=>import("@pages/detail"),
             meta:{
-                flag:false
+                flag:false,
+                checkToken:true
             }
         },
         bookstore,
         {
             path:"/buy",
+            props:true,
             name:"buy",
             component:_=>import("@pages/buy"),
             meta:{
-                flag:true
+                flag:true,
+                checkToken:true
             }
         },
         {
@@ -43,7 +57,8 @@ const router = new VueRouter({
             name:"orderInfo",
             component:_=>import("@pages/orderInfo"),
             meta:{
-                flag:false
+                flag:true,
+                checkToken:true
             }
         },
         {
@@ -51,16 +66,19 @@ const router = new VueRouter({
             name:"login",
             component:_=>import("@pages/login"),
             meta:{
-                flag:false
+                flag:false,
+                checkToken:true
             },
             
         }
     ]
+
 })
 
 
 router.beforeEach((to,from,next)=>{
-    if(to.path!="/login" && to.meta.flag){
+    let token=localStorage.getItem("token");
+    if(to.path!="/login" && to.meta.flag && !token){
         if(localStorage.getItem("token")){
             next();
         }else{
@@ -70,4 +88,6 @@ router.beforeEach((to,from,next)=>{
         next();
     }
 })
+
+
 export default router

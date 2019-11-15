@@ -11,16 +11,19 @@
                         <div class="detail">
                             <a class="detail-top" href="https://m.douban.com/book/subject/30396712/">
                                 <img src="https://img3.doubanio.com/view/subject/m/public/s33296332.jpg" alt="">
-                                <h3>北京联合出版公司(2019年)</h3>
+                                <h3>{{listInfo.press | toString()}}({{listInfo.card_subtitle | toDate()}})</h3>
                                 <i class="iconfont icon-arrow-right"></i>
                             </a>
-                            <a class="detail-price" href="https://market.douban.com/cart/checkout/?utm_campaign=douban_book_subject_buy_btn&sku_id=271469&utm_medium=mobile_web&utm_source=douban">
+                            <router-link 
+                            to="/orderInfo"
+                            tag="a"
+                            class="detail-price">
                                 <div class="config">
                                     <p>纸质版</p>
-                                    <span>38.40元</span>
+                                    <span>{{listInfo.price | toString()}}</span>
                                 </div>
                                 <div class="desc">满48元包邮</div>
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                     
@@ -29,7 +32,23 @@
 </template>
 <script>
 export default{
-
+    name:"buy",
+   
+    data(){
+        return{
+            listInfo:[]
+        }
+    },
+    created(){
+        let list=JSON.parse(localStorage.getItem("list"));
+        this.listInfo=list;
+    },
+    watch:{
+        "$route"(){
+            let list=JSON.parse(localStorage.getItem("list"));
+            this.listInfo=list;
+        }
+    }
 }
 </script>
 <style lang="scss">

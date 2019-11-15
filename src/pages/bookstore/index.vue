@@ -3,21 +3,26 @@
         <div class="banner-wrapper">
             <div class="banner">
                 <div class="swiper">
-                        <van-swipe :autoplay="3000" indicator-color="#e76648" show-indicators="true"	touchable="true">
+                        <van-swipe :autoplay="3000" indicator-color="#e76648" :show-indicators=true	:touchable=true>
                                 <van-swipe-item>
-                                        <img src="https://img1.doubanio.com/view/freyr_page_photo/raw/public/4794.jpg" alt="">
+                                        <!-- <img src="https://img1.doubanio.com/view/freyr_page_photo/raw/public/4794.jpg" alt=""> -->
+                                        <img src="@public/img/banner1.jpg" alt="">
                                 </van-swipe-item>
                                 <van-swipe-item>
-                                        <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4857.jpg" alt="">
+                                        <!-- <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4857.jpg" alt=""> -->
+                                        <img src="@public/img/banner2.jpg" alt="">
                                 </van-swipe-item>
                                 <van-swipe-item>
-                                        <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4731.jpg" alt="">
+                                        <!-- <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4731.jpg" alt=""> -->
+                                        <img src="@public/img/banner3.jpg" alt="">
                                 </van-swipe-item>
                                 <van-swipe-item>
-                                        <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4880.jpg" alt="">
+                                        <!-- <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4880.jpg" alt=""> -->
+                                        <img src="@public/img/banner4.jpg" alt="">
                                 </van-swipe-item>
                                 <van-swipe-item>
-                                        <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4915.jpg" alt="">
+                                        <!-- <img src="https://img3.doubanio.com/view/freyr_page_photo/raw/public/4915.jpg" alt=""> -->
+                                        <img src="@public/img/banner5.jpg" alt="">
                                 </van-swipe-item>
                                
                         </van-swipe>

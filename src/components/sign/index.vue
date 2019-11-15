@@ -1,7 +1,10 @@
 <template>
     <div>
         <header>
-            <a href="" class="iconfont icon-cha cancel"></a>
+            <v-touch 
+            tag="a"
+            @tap="closePage"
+            class="iconfont icon-cha cancel"></v-touch>
             <h3>登录豆瓣</h3>
             <p>新手机号将自动注册，请详读
                 <a href="https://accounts.douban.com/passport/agreement">豆瓣使用协议、隐私政策</a>
@@ -17,14 +20,14 @@
                 <div class="sign">
                     <form action="">
                         <input type="text" placeholder="手机号 / 邮箱" 
-                        class="sign" v-model="username">
+                        class="sign" :value="username" @input="inputMutations({type:'username',e:$event})"/>
                         <input type="password" placeholder="密码" 
-                        class="password" v-model="pwd">
+                        class="password" :value="password" @input="inputMutations({type:'password',e:$event})"/>
                     </form>
                     <v-touch tag="button" @tap="handleSign()" >登录</v-touch>
                     <div class="sign-method">
                         <div class="sign-switch">
-                            <v-touch @tap="handleChange($event)" tag="a" class="nopassword">免密码登录</v-touch>
+                            <v-touch @tap="changeShow" tag="a" class="nopassword">免密码登录</v-touch>
                             <a  class="sign-abroad">海外手机登录</a>
                         </div>
                         <a href="" class="findPassword">找回密码</a>
@@ -44,26 +47,37 @@
     </div>
 </template>
 <script>
+    import {mapState,mapMutations} from "vuex"
     export default {
         name: "login",
         data(){
             return{
                 is:true,
-                username:"",
-                pwd:"",
+                // username:"",
+                // password:"",
             }
+        },
+        computed:{
+            ...mapState({
+                username:state=>state.username,
+                password:state=>state.password
+            })
         },
         methods:{
-            handleChange(e){
-                e.preventDefault();
-                console.log(111);
-                // this.is=false;
-                this.$emit("handle",false);
-            },
+            ...mapMutations({
+                changeShow:"changeShow",
+                inputMutations:"inputMutations",
+                closePage:"closePage"
+
+           }),
+           
             handleSign(){
-                // localStorage.setItem("")
-            }
+                this.$store.dispatch("findActions","login");
+                // this.$router.push({name:"login"});
+            },
+            
         },
+        
     }
 </script>
 <style lang="scss">
