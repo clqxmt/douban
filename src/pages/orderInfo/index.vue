@@ -226,6 +226,7 @@
                 bottom: 5px;
                 color: rgba(0, 0, 0, .9);
                 font-weight: 500;
+                z-index:10;
             }
         }
 
@@ -242,7 +243,7 @@
                 clear: both;
                 color: rgba(0, 0, 0, .9);
                 overflow: hidden;
-                padding: 10px 15px;
+                padding: 10px 0;
                 border-bottom: 1px solid #f9f9f9;
                 border-color: #f9f9f9;
 
