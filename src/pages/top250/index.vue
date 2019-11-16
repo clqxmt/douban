@@ -8,7 +8,7 @@
           <ul>
             <router-link tag="li" :to="'/jayceDetail/'+item.id+'/'+item.title" v-for="(item,index) in booksList" :key="index">
               <div class="book_logo">
-                <img :src="item.cover.url" alt />
+                <img :src="item.cover?item.cover.url:item.pic.normal" alt />
               </div>
               <div class="book_introduce">
                 <h3>{{item.title}}</h3>
@@ -53,7 +53,8 @@ export default {
   },
   watch:{
     booksList(){
-      this.$refs.scroll.i();
+      this.$refs.scroll.handleRefreshDown();
+      this.$refs.scroll.handlefinishPullingUp();
     }
   },
   mounted(){
