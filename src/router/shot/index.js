@@ -1,0 +1,26 @@
+export default {
+    path:"/shot",
+    name:"shot",
+    component:_=>import("@pages/shot"),
+    children:[
+        {
+            path:"/shot",
+            redirect:"/shot/translate"
+        },
+        {
+            path:"translate",
+            component:_=>import("@components/translate"),
+            name:"translate"
+        },
+        {
+            path:"norms",
+            component:_=>import("@components/norms"),
+            name:"norms"
+        },
+        {
+            path:"comment",
+            component:_=>import("@components/comment"),
+            name:"comment"
+        },
+    ]
+}
