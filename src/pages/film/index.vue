@@ -53,6 +53,7 @@ export default {
   watch:{
     booksList(){
       this.$refs.scroll.handleRefreshDown();
+      this.$refs.scroll.handlefinishPullingUp();
     }
   },
   mounted(){

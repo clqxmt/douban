@@ -5,12 +5,12 @@
       <div class="detail" :style="{background:'#'+detail.header_bg_color}"> 
         <div class="book_info">
           <div class="book_logo">
-            <img :src="(detail.pic?detail.pic.normal:detail.cover.url)" alt />
+            <img :src="(detail.pic?detail.pic.normal:'')" alt />
           </div>
           <div class="introduce">
             <h2>{{detail.title}}</h2>
-            <div class="rank">
-              <span>No.{{detail.honor_infos[0] == undefined?'':detail.honor_infos[0].rank}}</span>
+            <div class="rank"  v-if="detail.honor_infos!=undefined && detail.honor_infos.length>0">
+              <span>No.{{detail.honor_infos[0].rank}}</span>
               <span>{{detail.honor_infos[0].title}}</span>
             </div>
             <p>{{detail.card_subtitle}}</p>
@@ -19,7 +19,7 @@
                 <i></i>
                 想读
               </span>
-              <span>
+              <span>  
                 <i></i>
                 在读
               </span>
@@ -39,14 +39,14 @@
             <a>打开App评分</a>
           </div>
           <div class="score_main">
-            <h1>{{detail.rating.value}}</h1>
+            <h1>{{detail.rating?detail.rating.value:''}}</h1>
             <div class="stars">
               <span class="star"></span>
               <span class="star"></span>
               <span class="star"></span>
               <span class="star"></span>
               <span class="star_none"></span>
-              <p>{{detail.rating.count}}人评分</p>
+              <p>{{detail.rating?detail.rating.count:''}}人评分</p>
             </div>
           </div>
         </div>
