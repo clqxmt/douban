@@ -8,8 +8,8 @@
           <img :src="detail.pic?detail.pic.normal:''"/>
           <div class="introduce">
             <h2>{{detail.title}}</h2>
-            <a>
-              <span>No.7</span>
+            <a v-if="detail.honor_infos!=undefined && detail.honor_infos.length>0">
+              <span>No.{{detail.honor_infos?detail.honor_infos[0].rank:''}}</span>
               <span>一周热门虚构类图书</span>
             </a>
             <p>{{detail.press?detail.press[0]:''}} / {{detail.pubdate?detail.pubdate[0]:''}}出版</p>
@@ -34,11 +34,11 @@
           <span>{{detail.rating?detail.rating.value:''}}</span>
           <div>
             <span>
-              <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></i>
-              <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></i>
-              <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></i>
-              <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></i>
-              <i class="iconfont icon-changyongtubiao-xianxingdaochu-zhuanqu-"></i>
+              <i class="iconfont icon-star"></i>
+              <i class="iconfont icon-star"></i>
+              <i class="iconfont icon-star"></i>
+              <i class="iconfont icon-star"></i>
+              <i class="iconfont icon-star"></i>
             </span>
             <p>{{detail.rating?detail.rating.count:''}}人评分</p>
           </div>
@@ -80,7 +80,7 @@ export default {
     data(){
         return {
             detail:[],
-            comment:[]
+            comment:[],
         }
     },
     async created(){

@@ -10,7 +10,7 @@
       <ul>
         <li>
           <span>京东商城</span>
-          <span>{{buy.price[0]}}元</span>
+          <span>{{buy.price?buy.price[0]:''}}元</span>
         </li>
         <li>
           <span>当当网</span>

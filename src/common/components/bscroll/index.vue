@@ -30,7 +30,6 @@ export default {
       //上拉加载更多
       pullUpLoad: true,
       tap: true,
-      click: true
     });
   },
   methods: {

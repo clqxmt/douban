@@ -11,10 +11,10 @@
             <span>|</span>虚构类
           </h2>
           <ul>
-            <router-link
+            <v-touch
               v-for="(item,index) in fakeList"
               :key="index"
-              :to="'/detail/'+item.id+'/'+item.title"
+              @tap="handleJump(item)"
               tag="li">
             
               <a>
@@ -32,7 +32,7 @@
                   <span>{{item.info}}</span>
                 </div>
               </a>
-            </router-link>
+            </v-touch>
           </ul>
         </div>
       </groll>
@@ -62,6 +62,9 @@ export default {
     async handleGetFamouseList(fakeId,countTotal){
       let data = await fakeApi(fakeId,countTotal);
       this.fakeList = data.subject_collection_items;
+    },
+    handleJump(item){
+      this.$router.push({path: '/detail/'+item.id+'/'+item.title, params:{id: item.id,title:item.title}});
     }
   },
   watch:{
@@ -136,10 +139,6 @@ export default {
             font-weight: 700;
             margin-top: 0.067rem;
             margin-bottom: 0.033rem;
-
-            span {
-              margin-left: 0.017rem;
-            }
           }
 
           p:nth-of-type(2) {
@@ -149,10 +148,13 @@ export default {
             i {
               font-style: normal;
               color: #f8c205;
+              font-size: .083rem;
+              margin-right: -0.017rem;
             }
 
             i:nth-of-type(5) {
               color: #ccc;
+              margin-right: 4px;
             }
           }
 

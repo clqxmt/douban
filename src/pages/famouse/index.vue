@@ -8,11 +8,12 @@
         <div class="middle-head">
           <h2>经典名著</h2>
           <ul>
-            <router-link
+            <v-touch
               tag="li"
               :to="'/famouseDetail/'+item.id+'/'+item.title"
               v-for="(item,index) in famouseList"
               :key="index"
+              @tap="handleJump(item)"
             >
               <a>
                 <img :src="item.cover?item.cover.url:''" />
@@ -29,7 +30,7 @@
                   <span>{{item.info}}</span>
                 </div>
               </a>
-            </router-link>
+            </v-touch>
           </ul>
         </div>
       </groll>
@@ -55,6 +56,9 @@ export default {
     async handleGetFakeList(fakeId, countTotal) {
       let data = await famouseApi(fakeId, countTotal);
       this.famouseList = data.subject_collection_items;
+    },
+    handleJump(item){
+      this.$router.push({path:'/famouseDetail/'+item.id+'/'+item.title,params:{id:item.id,title:item.title}})
     }
   },
   watch: {
