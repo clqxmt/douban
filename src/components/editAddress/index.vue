@@ -2,87 +2,128 @@
     <div class="container">
             <v-touch 
             tag="i"
-            @tap="cancel()"
+            @tap="showAddress()"
             class="cancel" >x</v-touch>
             <h3>新建地址</h3>
             <div class="address">
                 <div class="name input-text">
-                    <input type="text" placeholder="收货人姓名">
+                    <input type="text" placeholder="收货人姓名" 
+                        :value="name"
+                        @input="inputChange({type:'name',e:$event})"
+                    >
                 </div>
                 <div class="phone input-text">
-                    <input type="text" placeholder="收货人电话号码">
+                    <input type="text" placeholder="收货人电话号码"
+                        :value="phone"
+                        @input="inputChange({type:'phone',e:$event})"
+                    >
                 </div>
                 <div class="selectAddress">
                     <div class="selectProvince select">
-                        <select>
-                            <option value="">选择省</option>
-                            <!-- <option  v-for="(item,index) in pList">{{item.title}}</option> -->
+                        <select @change="selectChange({type:'province',e:$event})" 
+                        name="province"
+                        :value="stateProvince"
+                         
+                        >
+                            <option>选择省</option>
+                            <option
+                            v-for="(item,index) in provinceList" 
+                            :value="item.title+''+index"
+                            :key="index">{{item.title}}</option>
                         </select>
                         <i></i>
                     </div>
                     <div class="selectCity select">
-                        <select>
-                            <option value="">选择市</option>
+                        <select :value="stateCity" 
+                        name="city"
+                        @change="selectChange({type:'city',e:$event})"
+                       
+                        >
+                            <option value="选择市" selected>选择市</option>
+                            <option
+                            v-for="(item,index) in provinceList[provinceIndex].city" 
+                            index=index
+                            :key="index">{{item.cityTitle}}</option>
                         </select>
                     </div>
                     <div class="selectArea select">
-                        <select>
-                            <option value="">选择地区</option>
+                        <select :value="stateCounty" 
+                        name="county"
+                        @change="selectChange({type:'county',e:$event})">
+                            <option value="选择地区" selected>选择地区</option>
+                            <option 
+                            v-for="(item,index) in provinceList[provinceIndex].city[cityIndex].county" :key="index"
+                            >{{item}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="detailAddress">
-                    <textarea name="detail" placeholder="请输入详细地址，例街道号码，楼门号"></textarea>
+                    <textarea 
+                    :value="detailAddress" @input="inputChange({type:'detailAddress',e:$event})"
+                    name="detail" placeholder="请输入详细地址，例街道号码，楼门号"></textarea>
                 </div>
-                <button class="save">保存</button>
+                <v-touch tag="button" class="save" @tap="saveAddress()">保存</v-touch>
             </div>
     </div>
 </template>
 <script>
     import {cityApi} from "@api/city"
+    import {mapState,mapMutations} from "vuex"
 export default{
     name:"address",
     data(){
         return{
-            pList:[
+            provinceList:[
                 
                 {
-                    title:"北京",
+                    title:"北京市",
                     city:[
                         {
-                            cityTitle:"北京",
+                            cityTitle:"北京市",
                             county:["昌平区","朝阳区","海淀区"]
                         }
                     ]
                 },
                 {
-                    title:"河南",
+                    title:"河南省",
                     city:[
                         {
-                            cityTitle:"郑州",
+                            cityTitle:"郑州市",
                             county:["二七区","新郑市"]
                         },
                         {
-                            cityTitle:"安阳",
+                            cityTitle:"安阳市",
                             county:["文峰区","北城区"]
                         }
                     ]
                 }
             ],
-            
+           
         }
 
     },
-    methods:{
-        cancel(){
-            
-            this.$emit("handle",false);
-        }
+    computed:{
+        ...mapState({
+            name:state=>state.editAddress.name,
+            phone:state=>state.editAddress.phone,
+            stateProvince:state=>state.editAddress.provinec,
+            stateCity:state=>state.editAddress.city,
+            stateCounty:state=>state.editAddress.county,
+            detailAddress:state=>state.editAddress.detailAddress,
+            show:state=>state.editAddress.show,
+            provinceIndex:state=>state.editAddress.provinceIndex,
+            cityIndex:state=>state.editAddress.cityIndex
+        })
     },
-   async created(){
-        let data=await cityApi();
-        console.log(data);
-    }
+    methods:{
+        ...mapMutations({
+            selectChange:"editAddress/selectChange",
+            saveAddress:"editAddress/saveAddress",
+            inputChange:"editAddress/inputChange",
+            showAddress:"editAddress/showAddress"
+        })
+    },
+
 }
 </script>
 <style lang="scss">
@@ -192,7 +233,7 @@ export default{
             border-style: solid;
             position: relative;
             textarea{
-                font-size: 12px;
+                font-size: 14px;
                 padding-right: 10px;
                 padding-left: 10px;
                 line-height: 36px;

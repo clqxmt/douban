@@ -9,12 +9,9 @@
 
 <script>
 
-  import { cityApi } from "@api/city.js"
+ 
   export default {
-    // async created() {
-    //   let data = await cityApi();
-    //   console.log(data);
-    // }
+    
   }
 
 </script>

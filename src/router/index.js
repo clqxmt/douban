@@ -8,7 +8,6 @@ import nonfiction from './nonfiction'
 import highscore from './highscore'
 import film from './film'
 
-import tokenUtils from "@utils/token"
 
 Vue.use(VueRouter)
 
@@ -19,7 +18,6 @@ const router = new VueRouter({
     routes:[
         {
             path:"/",
-
             redirect:"/book"
         },
         {

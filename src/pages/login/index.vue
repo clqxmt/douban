@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Register v-if="!this.$store.state.is"></Register>
-        <Sign v-if="this.$store.state.is"></Sign>
+        <Register v-if="!this.$store.state.login.is"></Register>
+        <Sign v-if="this.$store.state.login.is"></Sign>
     </div>
 </template>
 <script>

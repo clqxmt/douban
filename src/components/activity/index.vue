@@ -1,27 +1,27 @@
 <template>
-    <div>
+    <div class="bookActivity">
         <ul>
-            <li>
+            <li v-for="(item,index) in list" :key="item.id">
                 <a  class="activity">
-                    <div class="poster">
+                    <div class="poster" :style="'background-image:url('+item.pic+')'">
                         <div class="activity-mask"></div>
                         <div class="poster-title">
-                            <div class="title">#阅无止境，一鹿相伴第二季#</div>
-                            <div class="sub-title">传统艺术里的中国味道</div>
+                            <div class="title">{{item.title}}</div>
+                            <div class="sub-title">{{item.subTitle}}</div>
                         </div>
                     </div>
-                    <div class='content'>
+                    <div class='bookActivity-content'>
                         <div class="content-header">
-                            <div class="content-title">来一起漫游艺术世界</div>
+                            <div class="content-title">{{item.content}}</div>
                         </div>
                         <div class="content-info">
                             <div class="join-people">
                                 <i class="iconfont icon-ren1"></i>
                                 <span>
-                                    <em>117</em>人参与
+                                    <em>{{item.people}}</em>人参与
                                 </span>
                             </div>
-                            <span class="activity-end">已结束</span>
+                            <span class="activity-end">{{item.status}}</span>
                         </div>
 
                     </div>
@@ -30,12 +30,30 @@
         </ul>
     </div>
 </template>
+
 <script>
+import {activityApi} from "@api/bookstore"
     export default {
+        data(){
+            return{
+                list:[]
+            }
+        },
+        created(){
+            this.requestData();
+        },
+        methods:{
+            async requestData(){
+                let data =await activityApi();
+                this.list=data.data.list;
+               
+            }
+        }
 
     }
 </script>
 <style lang="scss">
+.bookActivity{
     ul {
         padding: 15px 10px;
         box-sizing: border-box;
@@ -56,7 +74,7 @@
                     position: relative;
                     z-index: 1;
                     background-color: rgba(0, 0, 0, .03);
-                    background: url(https://img9.doubanio.com/view/freyr_page_photo/raw/public/2286.jpg);
+                    // background: url(https://img9.doubanio.com/view/freyr_page_photo/raw/public/2286.jpg);
 
                     .activity-mask {
                         position: absolute;
@@ -77,10 +95,14 @@
                         z-index: 2;
 
                         .title {
-                            text-align: center;
+                            font-size: 21px;
+                            font-weight: 500;
+                            margin-bottom: 2px;
                             color: #fff;
-                            position: relative;
-                            z-index: 2;
+                            // text-align: center;
+                            // color: #fff;
+                            // position: relative;
+                            // z-index: 2;
                         }
 
                         .sub-title {
@@ -91,7 +113,7 @@
 
                 }
 
-                .content {
+                .bookActivity-content {
                     width: 100%;
                     height: 105px;
                     box-sizing: border-box;
@@ -114,11 +136,13 @@
                     }
 
                     .content-info {
-                        overflow: hidden;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        word-break: break-all;
+                        font-size: 14px;
+                        color: #494949;
+                        overflow: auto;
+                        width: 100%;
+                        padding: 10px 20px 20px;
+                        box-sizing: border-box;
+                        
 
                         .join-people {
                             float: left;
@@ -128,7 +152,8 @@
                                 vertical-align: top;
                                 line-height: 1;
                                 color: #ebbb5a !important;
-                                // font-size:50px;
+                                // font-size:16px;
+                                margin-right:0.0417rem;
                             }
 
                             span {
@@ -154,4 +179,5 @@
             }
         }
     }
+}
 </style>

@@ -33,17 +33,13 @@
         <div class="list-tab">
            
             <div class="book-tab">
-                <!-- <keep-alive> -->
-                        <router-link :to="'/bookstore'+item.path" class="tab" v-for="(item,index) in tabList" :key="index">
-                            <v-touch tag="a" @tap="handleSwitch(index)" href="javascript:void(0)"  :class="active==index?'active':''">{{item.title}}</v-touch>
-                        </router-link>
-                <!-- </keep-alive> -->
-                <!-- <div class="tab">
-                    <v-touch tag="a" @tap="handleSwitch" href="javascript:void(0)">新书</v-touch>
-                </div>
-                <div class="tab">
-                    <v-touch tag="a" @tap="handleSwitch" href="javascript:void(0)">书单</v-touch>
-                </div> -->
+            
+            <router-link :to="'/bookstore'+item.path" class="tab" v-for="(item,index) in tabList" 
+                :class="active==index?'active':''"
+            :key="index">
+                <v-touch tag="a" @tap="handleSwitch(index)" href="javascript:void(0)"  >{{item.title}}</v-touch>
+            </router-link>
+            
             </div>
             <div class="cart-tab">
                 <a href="" class="cart">
@@ -52,7 +48,9 @@
                 </a>
             </div>
         </div>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 <script>
@@ -63,7 +61,7 @@
         name:"BookStore",
         data(){
             return{
-                active:0,
+                active:1,
                 tabList:[
                     {
                         title:"活动",

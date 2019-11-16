@@ -6,49 +6,49 @@
         <div class="category-list">
             <ul>
                 <li>
-                    <a href="">
+                    <a>
                         <span>虚构类图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <router-link tag="li" :to="'/nonfiction'">
-                    <a href="">
+                <router-link tag="li" to="/nonfiction">
+                    <a>
                         <span>非虚构图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </router-link>
                 <li>
-                    <a href="">
+                    <a>
                         <span>名著经典</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <router-link tag="li" :to="'/film'">
-                    <a href="">
+                <router-link tag="li" to="/film">
+                    <a >
                         <span>影视原著</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </router-link>
                 <li>
-                    <a href="">
+                    <a>
                         <span>新书速递</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <router-link tag="li" :to="'/highscore'">
-                    <a href="">
+                <router-link tag="li" to="/highscore">
+                    <a>
                         <span>高分图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </router-link>
                 <li>
-                    <a href="">
+                    <a>
                         <span>热门图书</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>
                 </li>
-                <router-link tag="li" :to="'/top250'">
-                    <a href="">
+                <router-link tag="li" to="/top250">
+                    <a>
                         <span>top250</span>
                         <i class="iconfont icon-arrow-right arrowRight"></i>
                     </a>

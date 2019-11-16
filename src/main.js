@@ -8,6 +8,7 @@ import VueTouch from "vue-touch"
 import "@common/components"
 import "@common/filter"
 import "@common/components";
+import "@utils/mock.js"
 
 import "./lib/loading/index.js";
 

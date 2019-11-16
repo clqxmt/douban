@@ -1,102 +1,66 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import tokenUtils from "@utils/token"
-import {findApi} from "@api/login"
-import VueRouter from "vue-router";
-const crypto = require('crypto');
-const router=new VueRouter();
-import MessageBox from "@lib/messageBox/index.js"
+import login from "./login"
+import editAddress from "./editAddress"
 
 Vue.use(Vuex)
 
-let state={
-  is:true,
-  token:"",
-  username:"",
-  password:""
-}
+// let state={
 
-let actions={
-  async findActions({commit}){
-    let data=await findApi();
-    
-    commit("loginMutations",data);
-  },
-}
 
-let mutations={
-  //改变is控制登录页面的注册页面的显示
-  changeShow(state){
-    state.is=!state.is;
-  },
 
-  //监听input中值
-  inputMutations(state,params){
-    switch(params.type){
-      case "username":
-        state.username=params.e.target.value;
-        break;
-      case "password":
-        state.password=params.e.target.value;
-        break;
-    }
-  },
+// /**编辑地址 */
+//   consignee:"",
+//   phone:"",
+//   provinc:"",
+//   city:"",
+//   county:"",
+//   detailAddress:"",
+//   address:"",
+//   hasAddress:false,
+  
+// }
+// let mutations={
 
-  //登录
-  loginMutations(state,data){
-    let hash=crypto.createHash("sha256").update(state.password).digest('hex');
-    
-    let has=false;
-    for(var i=0;i<data.length;i++){
-      
-        if(localStorage.getItem("token"))
-        {
-          //alert("已登录");
-          MessageBox({
-            content:"已登录",
-            confirm:function(){
-              router.push({name:"book"});
-            }
-          })
-          return;
-        }else if(state.username==data[i].username && hash==data[i].password)
-        {
-            let name=state.username;
-            let token=tokenUtils.sendToken({name});
-            localStorage.setItem("token",token);
-            this.token=token;
-            //alert("登录成功");
-            has=true;
-            MessageBox({
-              content:"登录成功",
-              confirm:()=>{
-                router.back();
-              }
-            })
-            break;
-        }
-    }
-    if(!has){
-      MessageBox({
-        content:"用户名或密码不存在",
-      });
-    }
-  },
 
-  //关闭页面
-  closePage(){
-    router.back();
+// /*编辑地址 */
+//   selectChange(state,parmas){
+//     switch(params.type){
+//       case "provinc":
+//         state.provinc=params.e.target.value
+//         break;
+//       case "city":
+//           state.city=params.e.target.value
+//           break;
+//       case "county":
+//           state.county=params.e.target.value
+//           break;
+//       case "detailAddress":
+//           state.detailAddress=params.e.target.value
+//           break;
+//     }
+//   },
+//   saveAddress(state){
+//     state.hasAddress=true;
+//     if(state.provinc===state.city){
+//       state.address=state.city+"/"+state.county+"/"+state.detailAddress;
+//     }else{
+//       state.address=state.provinc+"/"+state.city+"/"+state.county+"/"+state.detailAddress;
+//     }
+//   }
+// }
+
+
+const store = new Vuex.Store({
+  // state,
+  // actions,
+  // mutations,
+  modules:{
+    login,
+    editAddress
   }
-
-  
-}
-
-
-
-
-export default new Vuex.Store({
-  state,
-  actions,
-  mutations
-  
 })
+
+
+
+export default store

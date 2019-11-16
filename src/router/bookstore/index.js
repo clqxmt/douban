@@ -5,7 +5,7 @@ export default{
     children:[
         {
             path:"/bookstore",
-            redirect:"/bookstore/activity"
+            redirect:"/bookstore/newbook"
         },
         {
             path:"activity",

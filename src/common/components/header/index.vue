@@ -21,7 +21,7 @@
 </template>
 <script>
 import MessageBox from "@lib/messageBox/index.js"
-import {searchApi} from "@api/search"
+// import {searchApi} from "@api/search"
 export default{
     name:"Header",
     data(){
@@ -58,12 +58,12 @@ export default{
             })
         },
         //按下回车搜索
-        async handleSearch(e){
-            let searchVal=e.target.value;
-            console.log(111);
-            let data=await searchApi(searchVal);
-            console.log(data);
-        }
+        // async handleSearch(e){
+        //     let searchVal=e.target.value;
+        //     console.log(111);
+        //     let data=await searchApi(searchVal);
+        //     console.log(data);
+        // }
     },
     created(){
         let token=localStorage.getItem("token");

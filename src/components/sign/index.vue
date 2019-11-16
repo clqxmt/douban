@@ -52,19 +52,21 @@
        
         computed:{
             ...mapState({
-                username:state=>state.username,
-                password:state=>state.password
+                username:state=>state.login.username,
+                password:state=>state.login.password
+               
             })
         },
         methods:{
             ...mapMutations({
-                changeShow:"changeShow",
-                inputMutations:"inputMutations",
-                closePage:"closePage"
+                changeShow:"login/changeShow",
+                inputMutations:"login/inputMutations",
+                closePage:"login/closePage"
+                
 
            }),
             handleSign(){
-                this.$store.dispatch("findActions","login");
+                this.$store.dispatch("login/findActions");
                
             },
         },
@@ -79,8 +81,7 @@
     .login-header {
         margin-right: 12px;
         margin: 30px 0;
-        /* // font-size: 30px; */
-        /* // font-weight: 400; */
+       
         line-height: 1;
         text-align: center;
 

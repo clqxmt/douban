@@ -58,16 +58,16 @@
         name:"register",
         computed:{
             ...mapState({
-                username:state=>state.username,
-                password:state=>state.password,
+                username:state=>state.login.username,
+                password:state=>state.login.password,
                
             })
         },
         methods:{
            ...mapMutations({
-                changeShow:"changeShow",
-                inputMutations:"inputMutations",
-                closePage:"closePage"
+                changeShow:"login/changeShow",
+                inputMutations:"login/inputMutations",
+                closePage:"login/closePage"
            }),
             async handleRegister(){
                 let has=true;
@@ -79,7 +79,7 @@
                         MessageBox({
                             content:"用户已存在",
                             confirm:function(){
-                                this.$store.commit("changeShow");
+                                this.$store.commit("login/changeShow");
                             }
                         });
                         break;

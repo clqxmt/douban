@@ -1,11 +1,11 @@
 <template>
     <div>
-        <header class="orderInfo-header">
+        <div class="orderInfo-header">
             <div class="address">收货地址</div>
             <div>
                 <div>
                     <div></div>
-                    <div class="addAddress">
+                    <div class="addAddress" v-if="!hasAddress">
                         <a href="javascript:void(0)">
                             <v-touch 
                             tag="i"
@@ -16,8 +16,19 @@
                     </div>
                 </div>
             </div>
-        </header>
-        <section class="orderInfo-section">
+            <div class="addressInfo" v-if="hasAddress">
+                <div class="consigneeInfo">
+                    <p class="consignee">收货人：{{name}}</p>
+                    <p class="phone">{{phone}}</p>
+                </div>
+                <p class="detailAddress">
+                     {{address}}
+                </p>
+                <i class="iconfont arrow-right address-arrowRight"></i>
+            </div>
+            
+        </div>
+        <div class="orderInfo-section">
             <a href="" class="title">豆瓣书店</a>
             <div class="main">
                 <div class="book">
@@ -57,7 +68,7 @@
                 </div>
                 <div class="contact">*如有问题，可联系客服：400-835-3331 转4。</div>
             </div>
-        </section>
+        </div>
 
         <!-- 支付方式 -->
         <div class="pay-method">
@@ -87,12 +98,13 @@
             <div class="account-money">
                 <span>应付：<em>￥{{count}}</em></span>
             </div>
-            <a href="" class="address">请填地址</a>
+            <a class="address" v-if="!hasAddress">请填地址</a>
+            <a class="address submitOrder" v-if="hasAddress">提交订单</a>   
         </div>
 
         <transition name="showaddress">
             <div class="transition" v-show="show">
-                <EditAddress @handle="isShow"></EditAddress>
+                <EditAddress></EditAddress>
             </div>  
         </transition>
     </div>
@@ -100,14 +112,26 @@
 <script>
    
     import EditAddress from "@components/editAddress"
+    import {mapState,mapMutations} from "vuex"
     export default {
         name:"orderInfo",
         components:{
             EditAddress
         },
+        computed:{
+            ...mapState({
+                name:state=>state.editAddress.name,
+                phone:state=>state.editAddress.phone,
+                address:state=>state.editAddress.address,
+                hasAddress:state=>state.editAddress.hasAddress,
+                show:state=>state.editAddress.show
+               
+            }),
+            
+            
+        },
         data(){
             return{
-                show:false,
                 orderList:[],
                 price:"",
                 count:"",
@@ -117,12 +141,10 @@
 
         },
         methods:{
-            showAddress(){
-                console.log(111);
-                this.show=true;
-            },
+            ...mapMutations({
+                showAddress:"editAddress/showAddress"
+            }),
             isShow(params){
-               
                 this.show=params;
             },
             switchPayMethod(){
@@ -145,6 +167,8 @@
         },
         created(){
             this.requestData();
+            this.$store.commit("editAddress/getAddress");
+            console.log(this.hasAddress,222);
         },
         watch:{
             "$route"(){
@@ -159,7 +183,7 @@
     }
 
     .orderInfo-header {
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
 
         .address {
             font-size: 14px;
@@ -193,6 +217,47 @@
                     color: #dd1944;
                 }
             }
+        }
+        .addressInfo{
+            padding:15px 40px 15px 20px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 12px;
+            color: rgba(0,0,0,.9);
+            background-color: #fff;
+            .consigneeInfo{
+                font-size: 14px;
+                margin-bottom: 5px;
+                border-bottom: 1px solid #f9f9f9;
+                .consignee{
+                margin-right: 20px;
+                margin-bottom: 5px;
+                float: left;
+                color: rgba(0,0,0,.9);
+                }
+                .phone{
+
+                }
+            }
+            .detailAddress{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            .address-arrowRight{
+                right: 15px;
+                color: rgba(0,0,0,.9);
+                position: absolute;
+                z-index: 1;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                            }
+            
         }
     }
 
@@ -493,6 +558,12 @@
             display: block;
             text-align: center;
             color: #fff;
+        }
+        .submitOrder{
+            display: block;
+            text-align: center;
+            color: #fff;
+            background-color: #dd1944;
         }
     }
 

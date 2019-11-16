@@ -19,10 +19,10 @@ module.exports={
                 target:"http://zhouxunwang.cn",
                 changeOrigin:true
             },
-            "/search":{
-                target:"https://m.douban.com",
-                changeOrigin:true
-            }
+            // "/search":{
+            //     target:"https://m.douban.com",
+            //     changeOrigin:true
+            // }
         }
     },
     configureWebpack:{
