@@ -93,12 +93,13 @@ Vue.use(Toast);
               }
             }
             
-          }
+          }l
           if(is){
             this.list.num=1;
             good.push(this.list);
           }
-          // localStorage.setItem("doubanCart",JSON.stringify(good));
+          localStorage.setItem("doubanCart",JSON.stringify(good));
+          this.getCartcount();
         },
         //从localStorage中获取购物车中的商品数量
         getCartcount(){
