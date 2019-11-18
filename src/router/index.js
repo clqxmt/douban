@@ -7,6 +7,7 @@ import top250 from './top250'
 import nonfiction from './nonfiction'
 import highscore from './highscore'
 import film from './film'
+import search from './search'
 
 import tokenUtils from "@utils/token"
 
@@ -75,6 +76,7 @@ const router = new VueRouter({
         nonfiction,
         highscore,
         film,
+        search,
         {
             path:"/jayceDetail/:id/:nm",
             name:"jayceDetail",

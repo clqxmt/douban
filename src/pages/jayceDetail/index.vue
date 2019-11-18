@@ -116,7 +116,7 @@ export default {
   },
   async created(){
       let data = await JdetailApi(this.id);
-      console.log(data);
+      // console.log(data);
       this.detail = data;
       let CommentList = await JdetailCommentApi(this.id);
       this.commentList = CommentList.interests;
