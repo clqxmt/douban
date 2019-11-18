@@ -188,7 +188,7 @@ const topicData=Mock.mock({
 const detail=Mock.mock({
   "data":[
     {
-      "id":1,
+      "id":3,
       "bookName":"《你一生的故事》《呼吸》",
       "headerbgImg":"https://img9.doubanio.com/view/freyr_page_photo/raw/public/4976.jpg",
       "bookpic":"https://img1.doubanio.com/view/freyr_page_photo/raw/public/4969.jpg",
@@ -204,7 +204,7 @@ const detail=Mock.mock({
       "isSale":true
     },
     {
-      "id":2,
+      "id":1,
       "bookName":"萨拉戈萨手稿",
       "headerbgImg":"https://img9.doubanio.com/view/freyr_page_photo/raw/public/5006.jpg",
       "bookpic":"https://img3.doubanio.com/view/freyr_page_photo/raw/public/4993.jpg",
@@ -223,7 +223,7 @@ const detail=Mock.mock({
       "time":"11月18号"
     },
     {
-      "id":3,
+      "id":2,
       "bookName":"宫本武藏全传",
       "headerbgImg":"https://img9.doubanio.com/view/freyr_page_photo/raw/public/4936.jpg",
       "bookpic":"https://img1.doubanio.com/view/freyr_page_photo/raw/public/4939.jpg",
@@ -240,7 +240,7 @@ const detail=Mock.mock({
       "isSale":true
     },
     {
-      "id":4,
+      "id":5,
       "bookName":"雅卡尔科学思维三部曲",
       "headerbgImg":"https://img1.doubanio.com/view/freyr_page_photo/raw/public/4877.jpg",
       "bookpic":"https://img3.doubanio.com/view/freyr_page_photo/raw/public/4871.jpg",
@@ -256,7 +256,7 @@ const detail=Mock.mock({
       "isSale":true
     },
     {
-      "id":5,
+      "id":4,
       "bookName":"中村佑介的插画世界Ⅰ：蓝",
       "bookpic":"https://img3.doubanio.com/view/freyr_page_photo/raw/public/4912.jpg",
       "headerbgImg":"https://img3.doubanio.com/view/freyr_page_photo/raw/public/4910.jpg",

@@ -58,7 +58,7 @@
             this.bookstoreList = data.modules[8].data.subject_collection_boards[0].items;
             console.log(this.bookstoreList,111);
             this.bookstoreList[0].id=3;
-            this.bookstoreList[1].id=5;
+            this.bookstoreList[1].id=2;
             this.bookstoreList[2].id=4;
             this.bookstoreList[3].id=5;
         }
