@@ -1,5 +1,5 @@
 import http from "@utils/request"
-import { get } from "http"
+
 
 /**活动 */
 export const activityApi=()=>http({
@@ -21,10 +21,10 @@ export const topicApi=()=>http({
 })
 
 /**新书的详细信息 */
-export const newbookDetailApi=(id)=>http({
-  method:get,
-  url:"/bookstore/newbookDetail",
-  params:{
-    id:id
+export const detail=(bookId)=>http({
+  method:"get",
+  url:"/bookstore/detail",
+  data:{
+    id:bookId
   }
 })

@@ -1,5 +1,5 @@
 import tokenUtils from "@utils/token"
-import {findApi} from "@api/login"
+import {findUserApi} from "@api/login"
 import VueRouter from "vue-router";
 const crypto = require('crypto');
 const router=new VueRouter();
@@ -14,15 +14,18 @@ let state={
   password:""
 }
 
-let actions={
-  async findActions({commit}){
-    let data=await findApi();
+// let actions={
+//   async findActions({commit}){
+//     // let data=await findApi();
+//     let data=await findUserApi();
     
-    commit("loginMutations",data);
-  },
-}
+//     commit("loginMutations",data);
+//   },
+// }
 
 let mutations={
+
+ 
   //改变is控制登录页面的注册页面的显示
   changeShow(state){
     state.is=!state.is;
@@ -41,7 +44,9 @@ let mutations={
   },
 
   //登录
-  loginMutations(state,data){
+  loginMutations(state){
+    let data=JSON.parse(localStorage.getItem("user"));
+    console.log(data);
     let hash=crypto.createHash("sha256").update(state.password).digest('hex');
     
     let has=false;
@@ -53,7 +58,8 @@ let mutations={
           MessageBox({
             content:"已登录",
             confirm:function(){
-              router.push({name:"book"});
+              // router.back();
+              router.push("/");
             }
           })
           return;
@@ -91,7 +97,7 @@ let mutations={
 
 export default{
   state,
-  actions,
+  // actions,
   mutations,
   namespaced:true
 }

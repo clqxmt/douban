@@ -7,8 +7,7 @@ import top250 from './top250'
 import nonfiction from './nonfiction'
 import highscore from './highscore'
 import film from './film'
-import search from './search'
-
+import newbookDetail from "./newbookDetail"
 
 Vue.use(VueRouter)
 
@@ -41,6 +40,8 @@ const router = new VueRouter({
             }
         },
         bookstore,
+        newbookDetail,
+        
         {
             path:"/buy",
             props:true,
@@ -93,6 +94,14 @@ const router = new VueRouter({
             path:"/DostoevskyDetail",
             name:"DostoevskyDetail",
             component:_=>import("@pages/DostoevskyDetail"),
+            meta:{
+                flag:false
+            }
+        },
+        {
+            path:"/cart",
+            name:"cart",
+            component:_=>import("@pages/cart"),
             meta:{
                 flag:false
             }

@@ -2,6 +2,9 @@ export default{
     path:"/bookstore",
     name:"bookstore",
     component:_=>import("@pages/bookstore"),
+    meta:{
+        flag:false
+    },
     children:[
         {
             path:"/bookstore",

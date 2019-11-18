@@ -51,7 +51,7 @@
 </template>
 <script>
     import {mapState,mapMutations} from "vuex"
-    import {findApi,registerApi} from "@api/login"
+    import {findUserApi,registerApi} from "@api/login"
     import crypto from "crypto"
     import MessageBox from "@lib/messageBox/index.js"
     export default {
@@ -69,32 +69,37 @@
                 inputMutations:"login/inputMutations",
                 closePage:"login/closePage"
            }),
-            async handleRegister(){
+           async handleRegister(){
                 let has=true;
-               let data=await findApi();
-            //    console.log(data);
+                let _this=this;
+               let data=JSON.parse(localStorage.getItem("user"));
+               
                for(var i=0;i<data.length;i++){
                     if(this.username===data[i]["username"]){
                         has=false;
                         MessageBox({
                             content:"用户已存在",
                             confirm:function(){
-                                this.$store.commit("login/changeShow");
+                                _this.$store.commit("login/changeShow");
                             }
                         });
                         break;
                     }
                }
                if(has){
+                    
                     let hash=crypto.createHash("sha256").update(this.password).digest('hex');
                     let data=await registerApi(this.username,hash);
-                    MessageBox({
-                        content:"注册成功",
-                        confirm:function(){
-                            this.$store.commit("changeShow");
-                        }
-                    })
-                    
+                    console.log(data);
+                    if(data.data.status==1){
+                        MessageBox({
+                            content:"注册成功",
+                            confirm:function(){
+                                _this.$store.commit("login/changeShow");
+                                
+                            }
+                        })
+                    }
                }
            }
         }
