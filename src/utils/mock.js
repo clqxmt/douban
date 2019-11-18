@@ -2,15 +2,15 @@ import Mock from "mockjs"
 const url=require("url")
 
 /**注册 */
-const user=Mock.mock({
-  "data":[
-    {
-      "id":1,
-      "username":"张三",
-      "password":"12345"
-    }
-  ]
-})
+// const user=Mock.mock({
+//   "data":[
+//     {
+//       "id":1,
+//       "username":"张三",
+//       "password":"12345"
+//     }
+//   ]
+// })
 
 
 
@@ -289,13 +289,17 @@ Mock.mock(/\/user\/register/,"get",(options)=>{
       info:"注册成功"
     }
   }
-  user.data.push({
+  let userList=JSON.parse(localStorage.getItem("user"));
+  if(!userList){
+    userList=[]
+  }
+  userList.push({
     // "id":Mock.Random()
     "username":username,
     "password":password
-  });
-  // console.log(user.data,111);
-  localStorage.setItem("user",JSON.stringify(user.data));
+  })
+  console.log(userList,111);
+  localStorage.setItem("user",JSON.stringify(userList));
   return obj;
 })
 /**查找用户表 */
