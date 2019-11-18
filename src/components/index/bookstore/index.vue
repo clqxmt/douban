@@ -4,7 +4,10 @@
             <h4>豆瓣书店</h4>
             <router-link to="/bookstore" tag="a">更多</router-link>
         </div>
-        <a :href="bookstoreHeader.url" class="promBook">
+        <router-link 
+            tag="a"
+            to="/newbookDetail/1"
+         class="promBook">
             <img :src="bookstoreHeader.cover.url" alt="">
             <div class="find-content">
                 <div class="content-title">
@@ -15,17 +18,20 @@
                     {{bookstoreHeader.info}}
                 </p>
             </div>
-        </a>
+        </router-link>
         <div class="bookstore-list">
             <div class="bookstoreList">
                 <ul class="items bookstore-items">
-                    <li v-for="(item,index) in bookstoreList" :key="index">
+                    <router-link tag="li" v-for="(item,index) in bookstoreList" 
+                    :key="index"
+                    :to="'/newbookDetail/'+item.id"
+                    >
                         <a href="javascript:(0);">
                             <img :src="item.cover.url" alt="">
                             <span>{{item.title}}</span>
                             <i>￥{{item.price}}</i>
                         </a>
-                    </li>
+                    </router-link>
 
                 </ul>
             </div>
@@ -50,7 +56,11 @@
             }
             this.bookstoreHeader = data.modules[8].data.subject_collection_boards[0].header;
             this.bookstoreList = data.modules[8].data.subject_collection_boards[0].items;
-
+            console.log(this.bookstoreList,111);
+            this.bookstoreList[0].id=3;
+            this.bookstoreList[1].id=5;
+            this.bookstoreList[2].id=4;
+            this.bookstoreList[3].id=5;
         }
     }
 </script>

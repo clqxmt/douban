@@ -66,8 +66,8 @@
 
            }),
             handleSign(){
-                this.$store.dispatch("login/findActions");
-               
+                // this.$store.dispatch("login/findActions");
+               this.$store.commit("login/loginMutations")
             },
         },
         

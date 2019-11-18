@@ -1,7 +1,10 @@
 <template>
   <div class="book-list">
     <ul>
-        <li class="book-wrap" v-for="item in list" 
+        <router-link 
+          tag="li"
+          :to="'/newbookDetail/'+item.id"
+        class="book-wrap" v-for="item in list" 
             :key="item.id"
         >
             <a class="book">
@@ -17,7 +20,7 @@
                 <p>{{item.describe}}</p>
                 </div>
             </a>
-        </li>
+        </router-link>
     </ul>
   </div>
 </template>

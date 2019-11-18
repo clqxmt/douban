@@ -44,7 +44,7 @@
             <div class="cart-tab">
                 <a href="" class="cart">
                     <i class="iconfont icon-gouwuche"></i>
-                    <span class="cartCount has-count">2</span>
+                    <span class="cartCount has-count">{{goodCount}}</span>
                 </a>
             </div>
         </div>
@@ -77,15 +77,32 @@
                         title:"书单",
                         path:"/topic"
                     }
-                ]
+                ],
+                goodCount:0
             }
         },
         methods: {
             handleSwitch(index){
                 console.log(index);
                 this.active=index;
+            },
+            //从localStorage中获取购物车中的商品数量
+            getCartcount(){
+            this.goodCount=0;
+            let list=JSON.parse(localStorage.getItem("doubanCart"));
+            list.forEach((item)=>{
+                this.goodCount+=item.num;
+            })
             }
         },
+        created(){
+            this.getCartcount();
+        },
+        watch:{
+            "$route"(){
+                this.getCartcount();
+            }
+        }
     }
 </script>
 <style lang="scss">
