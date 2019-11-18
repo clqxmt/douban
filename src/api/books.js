@@ -116,3 +116,14 @@ export const DostoevskyApi = ()=>http({
         sku_id:271825
     }
 })
+
+// 搜索
+// /rexxar/api/v2/subject_collection
+// https://m.douban.com/search/?query=sad
+export const SearchApi = (query)=>http({
+    method:"get",
+    url:"/search/",
+    data:{
+        query
+    }
+})
