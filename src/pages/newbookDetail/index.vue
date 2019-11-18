@@ -105,9 +105,11 @@ Vue.use(Toast);
         getCartcount(){
           this.goodCount=0;
           let list=JSON.parse(localStorage.getItem("doubanCart"));
-          list.forEach((item)=>{
-            this.goodCount+=item.num;
-          })
+          if(list){
+            list.forEach((item)=>{
+              this.goodCount+=item.num;
+            })
+          }
         }
       },
       watch:{
