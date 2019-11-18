@@ -73,7 +73,9 @@
                 let has=true;
                 let _this=this;
                let data=JSON.parse(localStorage.getItem("user"));
-               
+               if(!data){
+                   data=[];
+               }
                for(var i=0;i<data.length;i++){
                     if(this.username===data[i]["username"]){
                         has=false;

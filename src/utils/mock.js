@@ -298,6 +298,10 @@ Mock.mock(/\/user\/register/,"get",(options)=>{
     "username":username,
     "password":password
   })
+  // user.data.push({
+  //   username:username,
+  //   password:password
+  // })
   console.log(userList,111);
   localStorage.setItem("user",JSON.stringify(userList));
   return obj;

@@ -176,6 +176,7 @@ export default {
   },
   computed:{
     count:function (){
+      console.log(222)
       let countPrice=0;
       // this.goodsList.forEach((item)=>{
        
