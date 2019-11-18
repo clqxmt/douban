@@ -42,10 +42,12 @@
             
             </div>
             <div class="cart-tab">
-                <a href="" class="cart">
+                <router-link tag="a" 
+               to="/cart"
+                class="cart">
                     <i class="iconfont icon-gouwuche"></i>
                     <span class="cartCount has-count">{{goodCount}}</span>
-                </a>
+                </router-link>
             </div>
         </div>
         <keep-alive>
