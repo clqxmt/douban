@@ -93,7 +93,7 @@ Vue.use(Toast);
               }
             }
             
-          }l
+          }
           if(is){
             this.list.num=1;
             good.push(this.list);
